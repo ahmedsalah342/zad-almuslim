@@ -2,7 +2,7 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#2196F3">
     <meta name="description" content="تطبيق زاد المسلم - مرجعك اليومي للقرآن الكريم والأذكار والأدعية">
     <title>زاد المسلم</title>
@@ -34,21 +34,20 @@
             direction: rtl;
         }
 
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: fixed;
+        }
+
         body {
             font-family: 'Cairo', sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
-            min-height: 100vh;
-            padding: 20px;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
             -webkit-tap-highlight-color: transparent;
-            overscroll-behavior-y: contain;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
         }
 
         .app-wrapper {
@@ -57,18 +56,20 @@
             left: 0;
             right: 0;
             bottom: 0;
-            overflow-y: auto;
+            overflow-y: scroll;
             -webkit-overflow-scrolling: touch;
-            padding: 20px;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         }
 
         .phone-container {
-            max-width: 480px;
+            max-width: 100%;
             margin: 0 auto;
             background: var(--card-bg);
-            border-radius: 20px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 0;
+            box-shadow: none;
             overflow: hidden;
+            height: auto;
+            min-height: 100%;
         }
 
         .header {
@@ -120,32 +121,28 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            right: 0;
+            bottom: 0;
             background: rgba(0,0,0,0.5);
             z-index: 1000;
             display: none;
-            align-items: flex-start;
-            justify-content: center;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            overscroll-behavior: contain;
-            padding: 20px;
+            overflow: hidden;
         }
 
         .modal-content {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             background: var(--card-bg);
-            width: 90%;
-            max-width: 480px;
-            margin: auto;
-            border-radius: 20px;
-            padding: 20px;
-            position: relative;
-            overflow-y: auto;
+            width: 100%;
+            max-width: 100%;
+            margin: 0;
+            border-radius: 0;
+            padding: 15px;
+            overflow-y: scroll;
             -webkit-overflow-scrolling: touch;
-            max-height: 85vh;
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
         }
 
         .close-button {
@@ -166,14 +163,10 @@
         }
 
         .content-section {
+            margin-bottom: 15px;
             background: var(--card-bg);
             border-radius: 10px;
             padding: 15px;
-            margin-bottom: 15px;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
         }
 
         .arabic-text {
@@ -195,20 +188,12 @@
         }
 
         @media (max-width: 480px) {
-            body {
-                padding: 10px;
-            }
-
             .app-wrapper {
-                padding: 10px;
-            }
-            
-            .modal {
-                padding: 10px;
+                padding: 0;
             }
 
             .phone-container {
-                border-radius: 15px;
+                border-radius: 0;
             }
 
             .grid-container {
@@ -218,142 +203,37 @@
 
             .grid-item {
                 padding: 12px;
+                font-size: 14px;
             }
 
             .modal-content {
-                width: 95%;
-                margin: 10px auto;
-                padding: 15px;
-                max-height: 90vh;
-                border-radius: 15px;
+                padding: 10px;
             }
 
             .content-section {
                 padding: 10px;
+                margin-bottom: 10px;
             }
 
             .arabic-text {
                 font-size: 16px;
                 line-height: 1.8;
             }
-        }
 
-        .settings-options {
-            padding: 20px;
-        }
+            .header {
+                padding: 10px;
+            }
 
-        .setting-item {
-            margin-bottom: 20px;
-            background: var(--card-bg);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .setting-item h3 {
-            color: var(--primary-color);
-            margin-bottom: 10px;
-        }
-
-        .theme-toggle {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .about-section {
-            text-align: center;
-            padding: 20px;
-        }
-
-        .about-section img {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            margin-bottom: 20px;
-            object-fit: cover;
-        }
-
-        .contact-form {
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .contact-form input,
-        .contact-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid var(--primary-color);
-            border-radius: 5px;
-            background: var(--bg-color);
-            color: var(--text-color);
-        }
-
-        .contact-form button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .settings-button {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 12px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-size: 16px;
-        }
-
-        .settings-button i {
-            font-size: 18px;
+            .header h1 {
+                font-size: 20px;
+            }
         }
 
         .scroll-to-top {
             position: fixed;
-            bottom: 20px;
+            bottom: env(safe-area-inset-bottom, 20px);
             left: 20px;
-            background: var(--primary-color);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-            z-index: 999;
-            border: none;
-            transition: all 0.3s ease;
-        }
-
-        .scroll-to-top:hover {
-            transform: translateY(-3px);
-        }
-
-        .scroll-to-top.visible {
-            display: flex;
+            z-index: 1001;
         }
     </style>
 </head>
@@ -1633,6 +1513,33 @@
                 });
             }, 100);
         }, { passive: true });
+
+        // تحسين التمرير
+        document.querySelectorAll('.modal-content, .app-wrapper').forEach(element => {
+            let touchStartY = 0;
+            let touchEndY = 0;
+
+            element.addEventListener('touchstart', function(e) {
+                touchStartY = e.touches[0].clientY;
+            }, { passive: true });
+
+            element.addEventListener('touchmove', function(e) {
+                touchEndY = e.touches[0].clientY;
+                const scrollTop = element.scrollTop;
+                const scrollHeight = element.scrollHeight;
+                const offsetHeight = element.offsetHeight;
+
+                // منع التمرير للأعلى عندما نكون في أعلى المحتوى
+                if (scrollTop <= 0 && touchEndY > touchStartY) {
+                    e.preventDefault();
+                }
+
+                // منع التمرير للأسفل عندما نكون في أسفل المحتوى
+                if (scrollTop + offsetHeight >= scrollHeight && touchEndY < touchStartY) {
+                    e.preventDefault();
+                }
+            }, { passive: false });
+        });
     </script>
 </body>
 </html>
