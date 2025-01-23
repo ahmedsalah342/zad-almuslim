@@ -2,10 +2,24 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#2196F3">
     <meta name="description" content="تطبيق زاد المسلم - مرجعك اليومي للقرآن الكريم والأذكار والأدعية">
     <title>زاد المسلم</title>
+    <link rel="manifest" href="./manifest.json">
+    <link rel="apple-touch-icon" href="./icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="زاد المسلم">
+    
+    <!-- تحميل EmailJS مبكراً -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("99PekU9UhSQKEhZbp");
+        })();
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
@@ -229,11 +243,441 @@
             }
         }
 
-        .scroll-to-top {
-            position: fixed;
-            bottom: env(safe-area-inset-bottom, 20px);
-            left: 20px;
-            z-index: 1001;
+        .about-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .about-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .about-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        .contact-section {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .contact-section img {
+            width: 200px;
+            height: 200px;
+            border-radius: 10px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        .contact-section h2 {
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .contact-section p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+            font-size: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .about-section, .contact-section {
+                padding: 15px;
+            }
+
+            .contact-section img {
+                width: 150px;
+                height: 150px;
+            }
+
+            .about-section h2, .contact-section h2 {
+                font-size: 20px;
+            }
+
+            .about-section p, .contact-section p {
+                font-size: 14px;
+            }
+        }
+
+        .contact-form {
+            background: var(--bg-color);
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .contact-form .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            padding-right: 40px;
+            border: none;
+            border-radius: 5px;
+            background: #fff;
+            color: #333;
+            font-size: 16px;
+            direction: rtl;
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .contact-form .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #0088ff;
+            font-size: 20px;
+        }
+
+        .contact-form .textarea-icon {
+            top: 20px;
+            transform: none;
+        }
+
+        .contact-form button {
+            background: #0088ff;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: auto;
+            display: inline-block;
+        }
+
+        @media (max-width: 480px) {
+            .contact-form {
+                padding: 15px;
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                font-size: 14px;
+                padding: 10px;
+                padding-right: 35px;
+            }
+
+            .contact-form .icon {
+                font-size: 18px;
+            }
+        }
+
+        .settings-button {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 16px;
+        }
+
+        .settings-button:hover {
+            opacity: 0.9;
+        }
+
+        .ruqya-section {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .ruqya-section:hover {
+            transform: translateY(-5px);
+        }
+
+        .ruqya-title {
+            color: #2c3e50;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .ruqya-title i {
+            color: #3498db;
+        }
+
+        .arabic-text {
+            font-family: 'Noto Naskh Arabic', serif;
+            font-size: 1.2rem;
+            line-height: 2;
+            text-align: right;
+            padding: 15px;
+            background: #fff;
+            border-radius: 10px;
+            margin: 10px 0;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .hadith-container {
+            background: #edf7ff;
+            border-right: 4px solid #3498db;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+        }
+
+        .hadith-text {
+            color: #34495e;
+            font-style: italic;
+        }
+
+        .hadith-source {
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .repeat-badge {
+            background: #3498db;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-right: 10px;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, #3498db, transparent);
+            margin: 20px 0;
+        }
+
+        .surah-section {
+            padding: 20px;
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin-bottom: 20px;
+        }
+
+        .surah-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .surah-header h2 {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .surah-info {
+            color: var(--secondary-text);
+            font-size: 1.1rem;
+        }
+
+        .virtues-section {
+            margin-bottom: 30px;
+        }
+
+        .virtues-section h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .hadith-container {
+            background: linear-gradient(145deg, #f1f1f1, #ffffff);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hadith-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .hadith-source {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+            margin: 30px 0;
+        }
+
+        .stories-section {
+            margin-bottom: 30px;
+        }
+
+        .stories-section h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .story-card {
+            background: linear-gradient(145deg, #ffffff, #f1f1f1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .story-card h4 {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .story-card p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .benefits-section {
+            margin-bottom: 30px;
+        }
+
+        .benefits-section h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .benefits-list li {
+            background: linear-gradient(145deg, #ffffff, #f1f1f1);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding-right: 35px;
+        }
+
+        .benefits-list li:before {
+            content: "✓";
+            color: var(--primary-color);
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .tips-section {
+            margin-bottom: 20px;
+        }
+
+        .tips-section h3 {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .tip-card {
+            display: flex;
+            align-items: center;
+            background: linear-gradient(145deg, #ffffff, #f1f1f1);
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .tip-card i {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-left: 15px;
+        }
+
+        .tip-card p {
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin: 0;
+        }
+
+        /* أنماط نموذج الاتصال */
+        .loading-spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2196F3;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .alert {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .submit-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
         }
     </style>
 </head>
@@ -242,11 +686,15 @@
         <div class="phone-container">
             <div class="header">
                 <div class="header-icons">
-                    <i class="fas fa-cog" onclick="openSettings()" style="cursor: pointer;"></i>
+                    <button onclick="openSettings()" class="settings-button">
+                        <i class="fas fa-cog"></i>
+                    </button>
                 </div>
                 <h1>زاد المسلم</h1>
                 <div class="header-icons">
-                    <i class="fas fa-moon" onclick="toggleDarkMode()" style="cursor: pointer;"></i>
+                    <button onclick="toggleDarkMode()" class="dark-mode-button">
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </div>
             </div>
             <div class="main-content">
@@ -258,18 +706,6 @@
                     <div class="grid-item" onclick="showContent('الرقية_بالسنة')">
                         <i class="fas fa-hand-holding-medical"></i>
                         <span>الرقية بالسنة</span>
-                    </div>
-                    <div class="grid-item" onclick="showContent('أذكار_الصباح')">
-                        <i class="fas fa-sun"></i>
-                        <span>أذكار الصباح</span>
-                    </div>
-                    <div class="grid-item" onclick="showContent('أذكار_المساء')">
-                        <i class="fas fa-moon"></i>
-                        <span>أذكار المساء</span>
-                    </div>
-                    <div class="grid-item" onclick="showContent('سورة_الملك')">
-                        <i class="fas fa-quran"></i>
-                        <span>سورة الملك</span>
                     </div>
                     <div class="grid-item" onclick="showContent('سورة_الكهف')">
                         <i class="fas fa-book"></i>
@@ -291,20 +727,35 @@
                         <i class="fas fa-graduation-cap"></i>
                         <span>أعلام الأمة</span>
                     </div>
+                    <div class="grid-item" onclick="showContent('أذكار_الصباح')">
+                        <i class="fas fa-sun"></i>
+                        <span>أذكار الصباح</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('أذكار_المساء')">
+                        <i class="fas fa-moon"></i>
+                        <span>أذكار المساء</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('سورة_الملك')">
+                        <i class="fas fa-book"></i>
+                        <span>سورة الملك</span>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- زر العودة للأعلى -->
-    <button class="scroll-to-top" onclick="scrollToTop()" aria-label="العودة للأعلى">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+    <!-- Modal Content -->
+    <div id="content-modal" class="modal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('content-modal')">×</button>
+            <div id="modal-content"></div>
+        </div>
+    </div>
 
     <!-- Modal Settings -->
     <div id="settings-modal" class="modal">
         <div class="modal-content">
-            <button class="close-button" onclick="closeSettings()">×</button>
+            <button class="close-button" onclick="closeModal('settings-modal')">×</button>
             <div class="settings-options">
                 <div class="setting-item">
                     <h3>الإعدادات</h3>
@@ -326,9 +777,8 @@
         <div class="modal-content">
             <button class="close-button" onclick="closeModal('about-modal')">×</button>
             <div class="about-section">
-                <img src="assets/logo.png" alt="شعار زاد المسلم">
-                <h3>من نحن</h3>
-                <p>تطبيق زاد المسلم هو مرجعك اليومي للقرآن الكريم والأذكار والأدعية</p>
+                <h2>من نحن</h2>
+                <p>مرحباً بكم في تطبيق "زاد المسلم" - رفيقكم اليومي في رحلة الإيمان والتقوى</p>
             </div>
         </div>
     </div>
@@ -337,1048 +787,67 @@
     <div id="contact-modal" class="modal">
         <div class="modal-content">
             <button class="close-button" onclick="closeModal('contact-modal')">×</button>
-            <div class="contact-form">
-                <h3>اتصل بنا</h3>
-                <input type="text" placeholder="الاسم" dir="rtl">
-                <input type="email" placeholder="البريد الإلكتروني" dir="rtl">
-                <textarea placeholder="رسالتك" dir="rtl"></textarea>
-                <button type="submit">إرسال</button>
-            </div>
-        </div>
-    </div>
+            <div class="contact-form-container">
+                <div id="alert-success" class="alert alert-success" style="display: none;">
+                    تم إرسال رسالتك بنجاح!
+                </div>
+                <div id="alert-error" class="alert alert-error" style="display: none;">
+                    عذراً، حدث خطأ أثناء إرسال الرسالة. حاول مرة أخرى.
+                </div>
+                <form id="contact-form" class="contact-form" onsubmit="return false;">
+                    <div class="input-group">
+                        <input type="text" id="name" placeholder="الأسم" required>
+                        <i class="fas fa-user icon"></i>
+                    </div>
 
-    <div id="content-modal" class="modal">
-        <div class="modal-content">
-            <button class="close-button" onclick="closeContentModal()">×</button>
-            <div id="modal-content"></div>
+                    <div class="input-group">
+                        <input type="email" id="email" placeholder="البريد الالكتروني" required>
+                        <i class="fas fa-envelope icon"></i>
+                    </div>
+
+                    <div class="input-group">
+                        <textarea id="message" placeholder="محتوى الرسالة" required></textarea>
+                        <i class="fas fa-comment icon textarea-icon"></i>
+                    </div>
+
+                    <button type="button" onclick="handleContactSubmit()" class="submit-btn">
+                        <span class="btn-text">إرسال</span>
+                        <div class="loading-spinner" style="display: none;"></div>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 
     <script>
-        const الرقية_بالقرآن = `
-            <div class="section-title">
-                <i class="fas fa-book-quran"></i>
-                <h2>الرقية بالقرآن</h2>
-            </div>
-            <div class="content-section">
-                <h3>سورة الفاتحة</h3>
-                <div class="arabic-text">
-                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾
-                </div>
-                <div class="hadith">
-                    <i class="fas fa-hadith"></i>
-                    <p>عن أبي سعيد الخدري رضي الله عنه أن النبي ﷺ قال: "فاتحة الكتاب شفاء من كل داء"</p>
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>آية الكرسي</h3>
-                <div class="arabic-text">
-                    اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
-                </div>
-                <div class="hadith">
-                    <i class="fas fa-hadith"></i>
-                    <p>عن أبي هريرة رضي الله عنه قال: قال رسول الله ﷺ: "من قرأ آية الكرسي في ليلة لم يزل عليه من الله حافظ ولا يقربه شيطان حتى يصبح"</p>
-                </div>
-            </div>
-        `;
-
-        const الرقية_بالسنة = `
-            <div class="section-title">
-                <i class="fas fa-hand-holding-medical"></i>
-                <h2>الرقية بالسنة</h2>
-            </div>
-            <div class="content-section">
-                <h3>رقية جبريل عليه السلام</h3>
-                <div class="arabic-text">
-                    بِسْمِ اللَّهِ أَرْقِيكَ، مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ، مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ، اللَّهُ يَشْفِيكَ، بِسْمِ اللَّهِ أَرْقِيكَ
-                </div>
-                <div class="hadith">
-                    <i class="fas fa-hadith"></i>
-                    <p>عن عائشة رضي الله عنها أن جبريل رقى النبي ﷺ بهذه الرقية</p>
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>رقية النبي ﷺ</h3>
-                <div class="arabic-text">
-                    اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا
-                </div>
-            </div>
-        `;
-
-        const أذكار_الصباح = `
-            <div class="section-title">
-                <i class="fas fa-sun"></i>
-                <h2>أذكار الصباح</h2>
-            </div>
-            <div class="content-section">
-                <h3>أذكار الاستيقاظ</h3>
-                <div class="arabic-text">
-                    الْحَمْدُ لِلَّهِ الَّذِي أَحْيَانَا بَعْدَ مَا أَمَاتَنَا وَإِلَيْهِ النُّشُورُ
-                </div>
-                <div class="hadith">
-                    <p>يقال مرة واحدة</p>
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>آية الكرسي</h3>
-                <div class="arabic-text">
-                    اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ...
-                </div>
-                <div class="hadith">
-                    <p>من قالها حين يصبح أجير من الجن حتى يمسي، ومن قالها حين يمسي أجير من الجن حتى يصبح</p>
-                </div>
-            </div>
-        `;
-
-        const أذكار_المساء = `
-            <div class="section-title">
-                <i class="fas fa-moon"></i>
-                <h2>أذكار المساء</h2>
-            </div>
-            <div class="content-section">
-                <h3>دعاء المساء</h3>
-                <div class="arabic-text">
-                    أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَٰهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ
-                </div>
-                <div class="hadith">
-                    <p>يقال مرة واحدة</p>
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>المعوذات</h3>
-                <div class="arabic-text">
-                    قُلْ هُوَ اللَّهُ أَحَدٌ... قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ... قُلْ أَعُوذُ بِرَبِّ النَّاسِ...
-                </div>
-                <div class="hadith">
-                    <p>تقرأ ثلاث مرات</p>
-                </div>
-            </div>
-        `;
-
-        const السيرة_النبوية = `
-            <div class="prophet-title" style="background: linear-gradient(45deg, #4CAF50, #2196F3); padding: 20px; border-radius: 10px; margin-bottom: 20px; color: white; text-align: center;">
-                <i class="fas fa-kaaba"></i>
-                <h2 style="margin: 0;">سيرة المصطفى ﷺ</h2>
-            </div>
-            <div class="content-section" style="background: #f8f9fa; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                <h3>نسبه الشريف ﷺ</h3>
-                <div class="arabic-text">
-                    <strong>اسمه:</strong> محمد بن عبد الله بن عبد المطلب بن هاشم بن عبد مناف
-                </div>
-                <div class="arabic-text">
-                    <strong>أمه:</strong> آمنة بنت وهب
-                </div>
-                <div class="arabic-text">
-                    <strong>مولده:</strong> في عام الفيل (571م) بمكة المكرمة
-                </div>
-            </div>
-
-            <div class="content-section" style="background: #fff3e0; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                <h3>زوجاته الطاهرات</h3>
-                <div class="arabic-text">
-                    <strong>1. خديجة بنت خويلد رضي الله عنها</strong>
-                    <ul>
-                        <li>أول زوجاته وأم أولاده إلا إبراهيم</li>
-                        <li>تزوجها وعمره 25 سنة</li>
-                        <li>أول من آمن به من النساء</li>
-                    </ul>
-                </div>
-                <div class="arabic-text">
-                    <strong>2. عائشة بنت أبي بكر رضي الله عنها</strong>
-                    <ul>
-                        <li>أحب نسائه إليه بعد خديجة</li>
-                        <li>أعلم نساء الأمة وأفقهن</li>
-                    </ul>
-                </div>
-                <div class="arabic-text">
-                    <strong>باقي زوجاته الطاهرات:</strong>
-                    <ul>
-                        <li>حفصة بنت عمر</li>
-                        <li>سودة بنت زمعة</li>
-                        <li>زينب بنت خزيمة</li>
-                        <li>زينب بنت جحش</li>
-                        <li>أم سلمة</li>
-                        <li>جويرية بنت الحارث</li>
-                        <li>أم حبيبة</li>
-                        <li>صفية بنت حيي</li>
-                        <li>ميمونة بنت الحارث</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="content-section" style="background: #e8f5e9; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                <h3>أولاده الكرام</h3>
-                <div class="arabic-text">
-                    <strong>من خديجة رضي الله عنها:</strong>
-                    <ul>
-                        <li>القاسم (وبه كُني)</li>
-                        <li>زينب</li>
-                        <li>رقية</li>
-                        <li>أم كلثوم</li>
-                        <li>فاطمة</li>
-                        <li>عبد الله</li>
-                    </ul>
-                </div>
-                <div class="arabic-text">
-                    <strong>من مارية القبطية:</strong>
-                    <ul>
-                        <li>إبراهيم</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="content-section" style="background: #e3f2fd; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                <h3>الغزوات المباركة</h3>
-                
-                <div class="battle-section" style="border-right: 4px solid #2196F3; padding: 10px; margin: 10px 0;">
-                    <h4>غزوة بدر الكبرى (2 هـ)</h4>
-                    <div class="arabic-text">
-                        <strong>سبب الغزوة:</strong> اعتراض قافلة قريش بقيادة أبي سفيان
-                    </div>
-                    <div class="arabic-text">
-                        <strong>أحداث المعركة:</strong>
-                        <ul>
-                            <li>خرج النبي ﷺ مع 313 من أصحابه</li>
-                            <li>استشار النبي ﷺ أصحابه، فقام المقداد وقال: "يا رسول الله، امضِ لما أراك الله، فنحن معك"</li>
-                            <li>نزل المطر ليلة المعركة فثبت به أقدام المؤمنين</li>
-                            <li>دعاء النبي ﷺ المشهور: "اللهم إن تهلك هذه العصابة لا تُعبد في الأرض"</li>
-                            <li>نزول الملائكة لنصرة المؤمنين</li>
-                            <li>انتصار المسلمين وقتل صناديد قريش</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="battle-section" style="border-right: 4px solid #4CAF50; padding: 10px; margin: 10px 0;">
-                    <h4>غزوة أُحد (3 هـ)</h4>
-                    <div class="arabic-text">
-                        <strong>سبب الغزوة:</strong> انتقام قريش لهزيمة بدر
-                    </div>
-                    <div class="arabic-text">
-                        <strong>أحداث المعركة:</strong>
-                        <ul>
-                            <li>خروج النبي ﷺ بـ 700 مقاتل</li>
-                            <li>وضع النبي ﷺ 50 راميًا على جبل الرماة</li>
-                            <li>بداية النصر للمسلمين</li>
-                            <li>مخالفة الرماة للأوامر وترك مواقعهم طمعًا في الغنائم</li>
-                            <li>التفاف خالد بن الوليد (قبل إسلامه) بخيله من خلف المسلمين</li>
-                            <li>إصابة النبي ﷺ في وجهه وكسر رباعيته</li>
-                            <li>استشهاد حمزة بن عبد المطلب رضي الله عنه</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="battle-section" style="border-right: 4px solid #FF5722; padding: 10px; margin: 10px 0;">
-                    <h4>غزوة الخندق (5 هـ)</h4>
-                    <div class="arabic-text">
-                        <strong>سبب الغزوة:</strong> تحالف قريش مع يهود بني النضير وقبائل غطفان لمهاجمة المدينة
-                    </div>
-                    <div class="arabic-text">
-                        <strong>أحداث المعركة:</strong>
-                        <ul>
-                            <li>اقتراح سلمان الفارسي رضي الله عنه بحفر الخندق</li>
-                            <li>مشاركة النبي ﷺ في الحفر مع الصحابة</li>
-                            <li>معجزة تكثير الطعام القليل</li>
-                            <li>محاولة بني قريظة نقض العهد</li>
-                            <li>إرسال الله الريح والملائكة لنصرة المؤمنين</li>
-                            <li>فرار الأحزاب وانتصار المسلمين</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="battle-section" style="border-right: 4px solid #9C27B0; padding: 10px; margin: 10px 0;">
-                    <h4>غزوة خيبر (7 هـ)</h4>
-                    <div class="arabic-text">
-                        <strong>سبب الغزوة:</strong> تحالف يهود خيبر مع قريش وتحريضهم القبائل على المسلمين
-                    </div>
-                    <div class="arabic-text">
-                        <strong>أحداث المعركة:</strong>
-                        <ul>
-                            <li>خروج النبي ﷺ بجيش قوامه 1400 مقاتل</li>
-                            <li>قول النبي ﷺ: "لأعطين الراية غداً رجلاً يحب الله ورسوله ويحبه الله ورسوله"</li>
-                            <li>إعطاء الراية لعلي بن أبي طالب رضي الله عنه</li>
-                            <li>فتح حصون خيبر الواحد تلو الآخر</li>
-                            <li>محاولة اليهودية تسميم النبي ﷺ بالشاة المسمومة</li>
-                            <li>صلح مع يهود خيبر على نصف ثمار أراضيهم</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="battle-section" style="border-right: 4px solid #4CAF50; padding: 10px; margin: 10px 0;">
-                    <h4>فتح مكة (8 هـ)</h4>
-                    <div class="arabic-text">
-                        <strong>سبب الفتح:</strong> نقض قريش لصلح الحديبية بمهاجمة حلفاء المسلمين
-                    </div>
-                    <div class="arabic-text">
-                        <strong>أحداث الفتح:</strong>
-                        <ul>
-                            <li>خروج النبي ﷺ بعشرة آلاف مقاتل</li>
-                            <li>إسلام أبي سفيان بعد رؤية قوة جيش المسلمين</li>
-                            <li>دخول مكة من أربعة محاور دون قتال</li>
-                            <li>تحطيم الأصنام حول الكعبة</li>
-                            <li>العفو العام عن أهل مكة: "اذهبوا فأنتم الطلقاء"</li>
-                            <li>صلاة النصر وخطبة الوداع</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="content-section" style="background: #fce4ec; border-radius: 10px; padding: 15px; margin-bottom: 15px;">
-                <h3>صفاته ﷺ</h3>
-                <div class="arabic-text">
-                    <strong>صفاته الخَلقية:</strong>
-                    <ul>
-                        <li>أبيض اللون مشرباً بحمرة</li>
-                        <li>شعره أسود، لا بالطويل ولا بالقصير</li>
-                        <li>عيناه واسعتان سوداوان</li>
-                        <li>أحسن الناس وجهاً وأنورهم</li>
-                        <li>كان ربعة من القوم، ليس بالطويل البائن ولا بالقصير</li>
-                        <li>كان إذا مشى تكفأ كأنما ينحط من صبب</li>
-                        <li>كان إذا التفت التفت جميعاً</li>
-                        <li>كان أحسن الناس عنقاً، كأن عنقه جيد دمية في صفاء الفضة</li>
-                    </ul>
-                </div>
-                <div class="arabic-text">
-                    <strong>صفاته الخُلقية:</strong>
-                    <ul>
-                        <li>أشجع الناس: كان لا يفر من العدو ولا يخاف في الله لومة لائم</li>
-                        <li>أكرم الناس: كان أجود بالخير من الريح المرسلة</li>
-                        <li>أرحم الناس: كان رحيماً بالصغير والكبير، وخاصة باليتامى والأرامل</li>
-                        <li>أحلم الناس: كان يقابل الإساءة بالإحسان والعفو</li>
-                        <li>أصدق الناس: لم يعرف عنه الكذب حتى قبل البعثة</li>
-                        <li>أزهد الناس: كان يعيش على الكفاف ويؤثر على نفسه</li>
-                        <li>أعدل الناس: كان يقيم الحد على الشريف والضعيف</li>
-                        <li>أتواضع الناس: كان يجلس على الأرض ويأكل على الأرض</li>
-                    </ul>
-                </div>
-                <div class="arabic-text">
-                    <strong>صفاته في معاملة الناس:</strong>
-                    <ul>
-                        <li>كان يبدأ من لقيه بالسلام</li>
-                        <li>لا يقطع حديث أحد حتى يكون هو الذي يقطعه</li>
-                        <li>إذا صافح رجلاً لا ينزع يده من يده حتى يكون الرجل هو الذي ينزع</li>
-                        <li>كان يمازح أصحابه ولا يقول إلا حقاً</li>
-                        <li>كان يعود المريض ويشيع الجنازة ويجيب دعوة المملوك</li>
-                        <li>كان يحب التيمن في شأنه كله</li>
-                        <li>كان أشد حياءً من العذراء في خدرها</li>
-                    </ul>
-                </div>
-            </div>
-        `;
-
-        const قصص_الأنبياء = `
-            <div class="content-section">
-                <h3>آدم عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> أبو البشر، خلقه الله من طين
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجة:</strong> حواء
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم الأحداث:</strong> خلقه الله بيده، أسجد له الملائكة، علمه الأسماء كلها
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>إدريس عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> إدريس بن يرد بن مهلائيل
-                </div>
-                <div class="arabic-text">
-                    <strong>مميزاته:</strong> أول من خط بالقلم، علمه الله علم النجوم والحساب
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>نوح عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> نوح بن لمك
-                </div>
-                <div class="arabic-text">
-                    <strong>الأبناء:</strong> سام، حام، يافث
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم الأحداث:</strong> دعا قومه 950 سنة، صنع السفينة، نجاة المؤمنين من الطوفان
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>هود عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> هود بن عبد الله
-                </div>
-                <div class="arabic-text">
-                    <strong>القوم:</strong> عاد الأولى
-                </div>
-                <div class="arabic-text">
-                    <strong>العذاب:</strong> ريح صرصر عاتية
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>صالح عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> صالح بن عبيد
-                </div>
-                <div class="arabic-text">
-                    <strong>القوم:</strong> ثمود
-                </div>
-                <div class="arabic-text">
-                    <strong>المعجزة:</strong> الناقة
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>إبراهيم عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> إبراهيم بن آزر
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات:</strong> سارة، هاجر
-                </div>
-                <div class="arabic-text">
-                    <strong>الأبناء:</strong> إسماعيل، إسحاق
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم الأحداث:</strong> تحطيم الأصنام، إلقاؤه في النار، بناء الكعبة
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>لوط عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> لوط بن هاران
-                </div>
-                <div class="arabic-text">
-                    <strong>القوم:</strong> قوم لوط
-                </div>
-                <div class="arabic-text">
-                    <strong>العذاب:</strong> قلب ديارهم وأمطرهم حجارة من سجيل
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>إسماعيل عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> إسماعيل بن إبراهيم
-                </div>
-                <div class="arabic-text">
-                    <strong>الأم:</strong> هاجر
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم الأحداث:</strong> الذبيح، بناء الكعبة مع أبيه
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>إسحاق عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> إسحاق بن إبراهيم
-                </div>
-                <div class="arabic-text">
-                    <strong>الأم:</strong> سارة
-                </div>
-                <div class="arabic-text">
-                    <strong>الأبناء:</strong> يعقوب، عيصو
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>يعقوب عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> يعقوب بن إسحاق
-                </div>
-                <div class="arabic-text">
-                    <strong>اللقب:</strong> إسرائيل
-                </div>
-                <div class="arabic-text">
-                    <strong>الأبناء:</strong> يوسف وإخوته الأحد عشر
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>يوسف عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> يوسف بن يعقوب
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم الأحداث:</strong> الرؤيا، إلقاؤه في البئر، العزيز، السجن، ملك مصر
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>أيوب عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> أيوب بن موص
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجة:</strong> رحمة
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم الأحداث:</strong> الابتلاء، الصبر، الشفاء
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>شعيب عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> شعيب بن ميكائيل
-                </div>
-                <div class="arabic-text">
-                    <strong>القوم:</strong> مدين وأصحاب الأيكة
-                </div>
-                <div class="arabic-text">
-                    <strong>اللقب:</strong> خطيب الأنبياء
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>موسى عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> موسى بن عمران
-                </div>
-                <div class="arabic-text">
-                    <strong>الأخ:</strong> هارون
-                </div>
-                <div class="arabic-text">
-                    <strong>المعجزات:</strong> العصا، اليد البيضاء، فلق البحر
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>هارون عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> هارون بن عمران
-                </div>
-                <div class="arabic-text">
-                    <strong>الأخ:</strong> موسى
-                </div>
-                <div class="arabic-text">
-                    <strong>المهمة:</strong> مساعدة موسى في الدعوة
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>داود عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> داود بن إيشا
-                </div>
-                <div class="arabic-text">
-                    <strong>المعجزات:</strong> تسبيح الجبال معه، لين الحديد
-                </div>
-                <div class="arabic-text">
-                    <strong>الملك:</strong> ملك بني إسرائيل
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>سليمان عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> سليمان بن داود
-                </div>
-                <div class="arabic-text">
-                    <strong>المعجزات:</strong> تسخير الريح والجن، فهم لغة الطير
-                </div>
-                <div class="arabic-text">
-                    <strong>الملك:</strong> أعظم ملك في التاريخ
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>إلياس عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> إلياس بن ياسين
-                </div>
-                <div class="arabic-text">
-                    <strong>القوم:</strong> بنو إسرائيل، عبدة بعل
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>اليسع عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> اليسع بن أخطوب
-                </div>
-                <div class="arabic-text">
-                    <strong>المعجزات:</strong> إحياء الموتى، شفاء المرضى
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>يونس عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> يونس بن متى
-                </div>
-                <div class="arabic-text">
-                    <strong>القوم:</strong> نينوى
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم الأحداث:</strong> التقام الحوت له، توبة قومه
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>زكريا عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> زكريا بن برخيا
-                </div>
-                <div class="arabic-text">
-                    <strong>الابن:</strong> يحيى
-                </div>
-                <div class="arabic-text">
-                    <strong>المهمة:</strong> كفالة مريم
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>يحيى عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> يحيى بن زكريا
-                </div>
-                <div class="arabic-text">
-                    <strong>المميزات:</strong> الحكم صبياً، البر بوالديه
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>عيسى عليه السلام</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> عيسى ابن مريم
-                </div>
-                <div class="arabic-text">
-                    <strong>المعجزات:</strong> إحياء الموتى، إبراء الأكمه والأبرص، المائدة
-                </div>
-                <div class="arabic-text">
-                    <strong>اللقب:</strong> المسيح، كلمة الله
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>محمد ﷺ</h3>
-                <div class="arabic-text">
-                    <strong>النسب:</strong> محمد بن عبد الله بن عبد المطلب
-                </div>
-                <div class="arabic-text">
-                    <strong>المعجزات:</strong> القرآن الكريم، الإسراء والمعراج
-                </div>
-                <div class="arabic-text">
-                    <strong>اللقب:</strong> خاتم النبيين
-                </div>
-            </div>
-        `;
-
-        const قصص_الصحابة = `
-            <div class="content-section">
-                <h3>أبو بكر الصديق رضي الله عنه</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> عبد الله بن أبي قحافة عثمان التيمي القرشي
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد:</strong> ولد بمكة بعد عام الفيل بسنتين وستة أشهر
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات والأولاد:</strong>
-                    - قتيلة بنت عبد العزى: أنجبت عبد الله وأسماء
-                    - أم رومان: أنجبت عبد الرحمن وعائشة
-                    - أسماء بنت عميس: أنجبت محمداً
-                    - حبيبة بنت خارجة: أنجبت أم كلثوم
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم أعماله:</strong>
-                    - أول من أسلم من الرجال
-                    - صاحب النبي ﷺ في الهجرة
-                    - أول الخلفاء الراشدين
-                    - جمع القرآن في مصحف واحد
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> توفي سنة 13هـ عن عمر 63 سنة
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>عمر بن الخطاب رضي الله عنه</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> عمر بن الخطاب بن نفيل القرشي العدوي
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد:</strong> ولد بمكة بعد عام الفيل بثلاث عشرة سنة
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات والأولاد:</strong>
-                    - زينب بنت مظعون: أنجبت عبد الله وحفصة
-                    - أم كلثوم بنت علي: أنجبت زيداً ورقية
-                    - جميلة بنت ثابت: أنجبت عاصماً
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم أعماله:</strong>
-                    - الفاروق الذي فرق الله به بين الحق والباطل
-                    - أول من جمع الناس على صلاة التراويح
-                    - أول من دون الدواوين
-                    - أول من اتخذ بيت المال
-                </div>
-                <div class="arabic-text">
-                    <strong>غزواته:</strong> شهد بدراً وأحداً والخندق وجميع المشاهد
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> استشهد سنة 23هـ على يد أبي لؤلؤة المجوسي
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>عثمان بن عفان رضي الله عنه</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> عثمان بن عفان بن أبي العاص الأموي القرشي
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد:</strong> ولد بمكة بعد عام الفيل بست سنين
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات والأولاد:</strong>
-                    - رقية بنت رسول الله ﷺ
-                    - أم كلثوم بنت رسول الله ﷺ
-                    - فاختة بنت غزوان: أنجبت عبد الله
-                    - أم عمرو بنت جندب: أنجبت عمراً
-                </div>
-                <div class="arabic-text">
-                    <strong>أهم أعماله:</strong>
-                    - جمع القرآن وأرسل المصاحف إلى الأمصار
-                    - وسع المسجد النبوي
-                    - جهز جيش العسرة
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> استشهد سنة 35هـ وهو يقرأ القرآن
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>علي بن أبي طالب رضي الله عنه</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> علي بن أبي طالب بن عبد المطلب الهاشمي القرشي
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد:</strong> ولد بمكة قبل البعثة بعشر سنين
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات والأولاد:</strong>
-                    - فاطمة بنت رسول الله ﷺ: أنجبت الحسن والحسين وزينب وأم كلثوم
-                    - خولة بنت جعفر: أنجبت محمد بن الحنفية
-                    - أم البنين: أنجبت العباس وجعفر وعثمان وعبد الله
-                </div>
-                <div class="arabic-text">
-                    <strong>غزواته:</strong>
-                    - شهد جميع الغزوات إلا تبوك
-                    - حامل الراية في خيبر
-                    - بطل يوم بدر وأحد
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> استشهد سنة 40هـ على يد عبد الرحمن بن ملجم
-                </div>
-            </div>
-        `;
-
-        const أعلام_الأمة = `
-            <div class="section-title">
-                <i class="fas fa-graduation-cap"></i>
-                <h2>أعلام الأمة</h2>
-            </div>
-            <div class="content-section">
-                <h3>الإمام البخاري</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> محمد بن إسماعيل بن إبراهيم بن المغيرة البخاري
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد والنشأة:</strong> ولد في بخارى سنة 194هـ، نشأ يتيماً في رعاية أمه
-                </div>
-                <div class="arabic-text">
-                    <strong>شيوخه:</strong> تتلمذ على يد كبار المحدثين مثل علي بن المديني وأحمد بن حنبل
-                </div>
-                <div class="arabic-text">
-                    <strong>مؤلفاته:</strong> الجامع الصحيح، التاريخ الكبير، الأدب المفرد
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> توفي سنة 256هـ في خرتنك قرب سمرقند
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>الإمام مسلم</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> مسلم بن الحجاج القشيري النيسابوري
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد والنشأة:</strong> ولد في نيسابور سنة 204هـ
-                </div>
-                <div class="arabic-text">
-                    <strong>شيوخه:</strong> البخاري وأحمد بن حنبل ويحيى بن يحيى النيسابوري
-                </div>
-                <div class="arabic-text">
-                    <strong>مؤلفاته:</strong> صحيح مسلم، الطبقات، الكنى والأسماء
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> توفي سنة 261هـ في نيسابور
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>الإمام أحمد</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> أحمد بن محمد بن حنبل الشيباني
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد والنشأة:</strong> ولد في بغداد سنة 164هـ
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات والأولاد:</strong>
-                    - عباسة
-                    - أم عبد الله
-                    - أنجبت صالحاً وعبد الله
-                </div>
-                <div class="arabic-text">
-                    <strong>شيوخه:</strong> الشافعي وعبد الرزاق الصنعاني وسفيان بن عيينة
-                </div>
-                <div class="arabic-text">
-                    <strong>مؤلفاته:</strong> المسند، الزهد، العلل
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> توفي سنة 241هـ في بغداد
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>الإمام الشافعي</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> محمد بن إدريس الشافعي المطلبي القرشي
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد والنشأة:</strong> ولد في غزة سنة 150هـ، ونشأ في مكة
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات والأولاد:</strong>
-                    - حميدة بنت نافع
-                    - أنجبت محمداً وفاطمة وزينب
-                </div>
-                <div class="arabic-text">
-                    <strong>شيوخه:</strong> مالك بن أنس ومحمد بن الحسن الشيباني
-                </div>
-                <div class="arabic-text">
-                    <strong>مؤلفاته:</strong> الأم، الرسالة، أحكام القرآن
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> توفي سنة 204هـ في مصر
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>الإمام مالك</h3>
-                <div class="arabic-text">
-                    <strong>الاسم الكامل:</strong> مالك بن أنس الأصبحي المدني
-                </div>
-                <div class="arabic-text">
-                    <strong>المولد والنشأة:</strong> ولد في المدينة المنورة سنة 93هـ
-                </div>
-                <div class="arabic-text">
-                    <strong>الزوجات والأولاد:</strong>
-                    - فاطمة
-                    - أنجبت يحيى ومحمداً
-                </div>
-                <div class="arabic-text">
-                    <strong>شيوخه:</strong> نافع مولى ابن عمر والزهري
-                </div>
-                <div class="arabic-text">
-                    <strong>مؤلفاته:</strong> الموطأ، رسالة في القدر
-                </div>
-                <div class="arabic-text">
-                    <strong>وفاته:</strong> توفي سنة 179هـ في المدينة المنورة
-                </div>
-            </div>
-        `;
-
-        const سورة_الملك = `
-            <div class="content-section">
-                <h3>فضل سورة الملك</h3>
-                <div class="arabic-text">
-                    عن أبي هريرة رضي الله عنه أن النبي ﷺ قال: "إِنَّ سُورَةً مِنَ الْقُرْآنِ ثَلاَثُونَ آيَةً شَفَعَتْ لِرَجُلٍ حَتَّى غُفِرَ لَهُ وَهِيَ: تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ"
-                </div>
-                <div class="arabic-text">
-                    وعن ابن عباس رضي الله عنهما أن النبي ﷺ قال: "وَدِدْتُ أَنَّهَا فِي قَلْبِ كُلِّ إِنْسَانٍ مِنْ أُمَّتِي" يعني سورة تبارك
-                </div>
-                <div class="arabic-text">
-                    وعن ابن مسعود رضي الله عنه قال: "هِيَ الْمَانِعَةُ، هِيَ الْمُنْجِيَةُ، تُنْجِي مِنْ عَذَابِ الْقَبْرِ"
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>معلومات عن السورة</h3>
-                <div class="arabic-text">
-                    <strong>اسم السورة:</strong> سورة الملك، وتسمى أيضاً تبارك
-                </div>
-                <div class="arabic-text">
-                    <strong>عدد آياتها:</strong> 30 آية
-                </div>
-                <div class="arabic-text">
-                    <strong>نوع السورة:</strong> مكية
-                </div>
-                <div class="arabic-text">
-                    <strong>ترتيبها:</strong> السورة رقم 67 في المصحف
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>نص السورة</h3>
-                <div class="arabic-text">
-                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
-                </div>
-                <div class="arabic-text">
-                    تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ ﴿١﴾ الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا ۚ وَهُوَ الْعَزِيزُ الْغَفُورُ ﴿٢﴾ الَّذِي خَلَقَ سَبْعَ سَمَاوَاتٍ طِبَاقًا ۖ مَّا تَرَىٰ فِي خَلْقِ الرَّحْمَٰنِ مِن تَفَاوُتٍ ۖ فَارْجِعِ الْبَصَرَ هَلْ تَرَىٰ مِن فُطُورٍ ﴿٣﴾ ثُمَّ ارْجِعِ الْبَصَرَ كَرَّتَيْنِ يَنقَلِبْ إِلَيْكَ الْبَصَرُ خَاسِئًا وَهُوَ حَسِيرٌ ﴿٤﴾
-                </div>
-                <div class="arabic-text">
-                    وَلَقَدْ زَيَّنَّا السَّمَاءَ الدُّنْيَا بِمَصَابِيحَ وَجَعَلْنَاهَا رُجُومًا لِّلشَّيَاطِينِ ۖ وَأَعْتَدْنَا لَهُمْ عَذَابَ السَّعِيرِ ﴿٥﴾ وَلِلَّذِينَ كَفَرُوا بِرَبِّهِمْ عَذَابُ جَهَنَّمَ ۖ وَبِئْسَ الْمَصِيرُ ﴿٦﴾ إِذَا أُلْقُوا فِيهَا سَمِعُوا لَهَا شَهِيقًا وَهِيَ تَفُورُ ﴿٧﴾ تَكَادُ تَمَيَّزُ مِنَ الْغَيْظِ ۖ كُلَّمَا أُلْقِيَ فِيهَا فَوْجٌ سَأَلَهُمْ خَزَنَتُهَا أَلَمْ يَأْتِكُمْ نَذِيرٌ ﴿٨﴾ قَالُوا بَلَىٰ قَدْ جَاءَنَا نَذِيرٌ فَكَذَّبْنَا وَقُلْنَا مَا نَزَّلَ اللَّهُ مِن شَيْءٍ إِنْ أَنتُمْ إِلَّا فِي ضَلَالٍ كَبِيرٍ ﴿٩﴾
-                </div>
-                <div class="arabic-text">
-                    قَالُوا لَوْ كُنَّا نَسْمَعُ أَوْ نَعْقِلُ مَا كُنَّا فِي أَصْحَابِ السَّعِيرِ ﴿١٠﴾ فَاعْتَرَفُوا بِذَنبِهِمْ فَسُحْقًا لِّأَصْحَابِ السَّعِيرِ ﴿١١﴾ إِنَّ الَّذِينَ يَخْشَوْنَ رَبَّهُم بِالْغَيْبِ لَهُم مَّغْفِرَةٌ وَأَجْرٌ كَبِيرٌ ﴿١٢﴾ وَأَسِرُّوا قَوْلَكُمْ أَوِ اجْهَرُوا بِهِ ۖ إِنَّهُ عَلِيمٌ بِذَاتِ الصُّدُورِ ﴿١٣﴾ أَلَا يَعْلَمُ مَنْ خَلَقَ وَهُوَ اللَّطِيفُ الْخَبِيرُ ﴿١٤﴾ هُوَ الَّذِي جَعَلَ لَكُمُ الْأَرْضَ ذَلُولًا فَامْشُوا فِي مَنَاكِبِهَا وَكُلُوا مِن رِّزْقِهِ ۖ وَإِلَيْهِ النُّشُورُ ﴿١٥﴾
-                </div>
-                <div class="arabic-text">
-                    أَأَمِنتُم مَّن فِي السَّمَاءِ أَن يَخْسِفَ بِكُمُ الْأَرْضَ فَإِذَا هِيَ تَمُورُ ﴿١٦﴾ أَمْ أَمِنتُم مَّن فِي السَّمَاءِ أَن يُرْسِلَ عَلَيْكُمْ حَاصِبًا ۖ فَسَتَعْلَمُونَ كَيْفَ نَذِيرِ ﴿١٧﴾ وَلَقَدْ كَذَّبَ الَّذِينَ مِن قَبْلِهِمْ فَكَيْفَ كَانَ نَكِيرِ ﴿١٨﴾ أَوَلَمْ يَرَوْا إِلَى الطَّيْرِ فَوْقَهُمْ صَافَّاتٍ وَيَقْبِضْنَ ۖ مَا يُمْسِكُهُنَّ إِلَّا الرَّحْمَٰنُ ۚ إِنَّهُ بِكُلِّ شَيْءٍ بَصِيرٌ ﴿١٩﴾ أَمَّنْ هَٰذَا الَّذِي هُوَ جُندٌ لَّكُمْ يَنصُرُكُم مِن دُونِ الرَّحْمَٰنِ ۚ إِنِ الْكَافِرُونَ إِلَّا فِي غُرُورٍ ﴿٢٠﴾
-                </div>
-                <div class="arabic-text">
-                    أَمَّنْ هَٰذَا الَّذِي يَرْزُقُكُمْ إِنْ أَمْسَكَ رِزْقَهُ ۚ بَل لَّجُّوا فِي عُتُوٍّ وَنُفُورٍ ﴿٢١﴾ أَفَمَن يَمْشِي مُكِبًّا عَلَىٰ وَجْهِهِ أَهْدَىٰ أَمَّن يَمْشِي سَوِيًّا عَلَىٰ صِرَاطٍ مُّسْتَقِيمٍ ﴿٢٢﴾ قُلْ هُوَ الَّذِي أَنشَأَكُمْ وَجَعَلَ لَكُمُ السَّمْعَ وَالْأَبْصَارَ وَالْأَفْئِدَةَ ۖ قَلِيلًا مَّا تَشْكُرُونَ ﴿٢٣﴾ قُلْ هُوَ الَّذِي ذَرَأَكُمْ فِي الْأَرْضِ وَإِلَيْهِ تُحْشَرُونَ ﴿٢٤﴾
-                </div>
-                <div class="arabic-text">
-                    وَيَقُولُونَ مَتَىٰ هَٰذَا الْوَعْدُ إِن كُنتُمْ صَادِقِينَ ﴿٢٥﴾
-                </div>
-                <div class="arabic-text">
-                    قُلْ إِنَّمَا الْعِلْمُ عِندَ اللَّهِ وَإِنَّمَا أَنَا نَذِيرٌ مُّبِينٌ ﴿٢٦﴾ فَلَمَّا رَأَوْهُ زُلْفَةً سِيئَتْ وُجُوهُ الَّذِينَ كَفَرُوا وَقِيلَ هَٰذَا الَّذِي كُنتُم بِهِ تَدَّعُونَ ﴿٢٧﴾ قُلْ أَرَأَيْتُمْ إِنْ أَهْلَكَنِيَ اللَّهُ وَمَن مَّعِيَ أَوْ رَحِمَنَا فَمَن يُجِيرُ الْكَافِرِينَ مِنْ عَذَابٍ أَلِيمٍ ﴿٢٨﴾ قُلْ هُوَ الرَّحْمَٰنُ آمَنَّا بِهِ وَعَلَيْهِ تَوَكَّلْنَا ۖ فَسَتَعْلَمُونَ مَنْ هُوَ فِي ضَلَالٍ مُّبِينٍ ﴿٢٩﴾ قُلْ أَرَأَيْتُمْ إِنْ أَصْبَحَ مَاؤُكُمْ غَوْرًا فَمَن يَأْتِيكُم بِمَاءٍ مَّعِينٍ ﴿٣٠﴾
-                </div>
-            </div>
-        `;
-
-        const سورة_الكهف = `
-            <div class="content-section">
-                <h3>فضل سورة الكهف</h3>
-                <div class="arabic-text">
-                    عن أبي الدرداء رضي الله عنه أن النبي ﷺ قال: "مَنْ حَفِظَ عَشْرَ آيَاتٍ مِنْ أَوَّلِ سُورَةِ الْكَهْفِ عُصِمَ مِنَ الدَّجَّالِ"
-                </div>
-                <div class="arabic-text">
-                    عن أبي سعيد الخدري رضي الله عنه أن النبي ﷺ قال: "مَنْ قَرَأَ سُورَةَ الْكَهْفِ فِي يَوْمِ الْجُمُعَةِ، أَضَاءَ لَهُ مِنَ النُّورِ مَا بَيْنَ الْجُمُعَتَيْنِ"
-                </div>
-                <div class="arabic-text">
-                    وعن البراء بن عازب رضي الله عنه قال: "كان رجل يقرأ سورة الكهف وعنده فرس مربوط بشطنين، فتغشته سحابة، فجعلت تدنو وتدنو، وجعل فرسه ينفر منها، فلما أصبح أتى النبي ﷺ فذكر ذلك له، فقال: تلك السكينة تنزلت للقرآن"
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>معلومات عن السورة</h3>
-                <div class="arabic-text">
-                    <strong>اسم السورة:</strong> سورة الكهف
-                </div>
-                <div class="arabic-text">
-                    <strong>عدد آياتها:</strong> 110 آيات
-                </div>
-                <div class="arabic-text">
-                    <strong>نوع السورة:</strong> مكية
-                </div>
-                <div class="arabic-text">
-                    <strong>ترتيبها:</strong> السورة رقم 18 في المصحف
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>مواضيع السورة</h3>
-                
-                <div class="arabic-text">
-                    <strong>1. قصة أصحاب الكهف:</strong>
-                    قصة الفتية المؤمنين الذين لجأوا إلى الكهف فراراً بدينهم، وكيف أنامهم الله ثلاثمائة وتسع سنين ثم بعثهم.
-                </div>
-                <div class="arabic-text">
-                    <strong>2. قصة صاحب الجنتين:</strong>
-                    قصة الرجل الغني صاحب البستانين وصاحبه المؤمن، وكيف أن الغنى والمال قد يكون سبباً في الطغيان.
-                </div>
-                <div class="arabic-text">
-                    <strong>3. قصة موسى مع الخضر:</strong>
-                    رحلة موسى عليه السلام مع العبد الصالح الخضر وما فيها من دروس في التواضع وطلب العلم.
-                </div>
-                <div class="arabic-text">
-                    <strong>4. قصة ذي القرنين:</strong>
-                    قصة الملك الصالح ذي القرنين ورحلاته في الأرض وبناء السد لحماية الناس من يأجوج ومأجوج.
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>من فوائد قراءة سورة الكهف</h3>
-                <div class="arabic-text">
-                    1. الحماية من فتنة الدجال
-                </div>
-                <div class="arabic-text">
-                    2. النور والبركة من جمعة إلى جمعة
-                </div>
-                <div class="arabic-text">
-                    3. تنزل السكينة عند قراءتها
-                </div>
-                <div class="arabic-text">
-                    4. تحصين النفس من الفتن
-                </div>
-            </div>
-            <div class="content-section">
-                <h3>أوقات قراءة السورة</h3>
-                <div class="arabic-text">
-                    1. يوم الجمعة: وهو أفضل وقت لقراءتها لما ورد في الحديث
-                </div>
-                <div class="arabic-text">
-                    2. ليلة الجمعة: وتبدأ من غروب شمس يوم الخميس
-                </div>
-                <div class="arabic-text">
-                    3. عند مواجهة الفتن والشدائد
-                </div>
-            </div>
-        `;
-
-        const من_نحن = `
-            <div class="section-title">
-                <i class="fas fa-info-circle"></i>
-                <h2>من نحن</h2>
-            </div>
-            <div class="content-section">
-                <div class="arabic-text">
-                    تطبيق زاد المسلم هو مرجع إسلامي شامل يحتوي على مجموعة من الأذكار والأدعية والرقى الشرعية، بالإضافة إلى السيرة النبوية وقصص الأنبياء والصحابة.
-                </div>
-            </div>
-        `;
-
-        const اتصل_بنا = `
-            <div class="section-title">
-                <i class="fas fa-envelope"></i>
-                <h2>اتصل بنا</h2>
-            </div>
-            <div class="content-section">
-                <form class="contact-form" onsubmit="sendEmail(event)">
-                    <input type="text" id="name" placeholder="الاسم" required>
-                    <input type="email" id="email" placeholder="البريد الالكتروني" required>
-                    <textarea id="message" placeholder="محتوى الرسالة" required></textarea>
-                    <button type="submit">إرسال</button>
-                </form>
-            </div>
-        `;
-
         function showContent(contentId) {
             const contentModal = document.getElementById('content-modal');
             const modalContent = document.getElementById('modal-content');
-            
-            switch(contentId) {
-                case 'الرقية_بالقرآن':
-                    modalContent.innerHTML = الرقية_بالقرآن;
-                    break;
-                case 'الرقية_بالسنة':
-                    modalContent.innerHTML = الرقية_بالسنة;
-                    break;
-                case 'أذكار_الصباح':
-                    modalContent.innerHTML = أذكار_الصباح;
-                    break;
-                case 'أذكار_المساء':
-                    modalContent.innerHTML = أذكار_المساء;
-                    break;
-                case 'السيرة_النبوية':
-                    modalContent.innerHTML = السيرة_النبوية;
-                    break;
-                case 'قصص_الأنبياء':
-                    modalContent.innerHTML = قصص_الأنبياء;
-                    break;
-                case 'قصص_الصحابة':
-                    modalContent.innerHTML = قصص_الصحابة;
-                    break;
-                case 'أعلام_الأمة':
-                    modalContent.innerHTML = أعلام_الأمة;
-                    break;
-                case 'سورة_الملك':
-                    modalContent.innerHTML = سورة_الملك;
-                    break;
-                case 'سورة_الكهف':
-                    modalContent.innerHTML = سورة_الكهف;
-                    break;
-                case 'من_نحن':
-                    modalContent.innerHTML = من_نحن;
-                    break;
-                case 'اتصل_بنا':
-                    modalContent.innerHTML = اتصل_بنا;
-                    break;
-            }
-
+            modalContent.innerHTML = getContent(contentId);
             contentModal.style.display = 'flex';
-            
-            // تحسين التمرير
             document.body.style.overflow = 'hidden';
-            modalContent.scrollTop = 0;
-            
-            // تفعيل الحركة السلسة
-            requestAnimationFrame(() => {
-                modalContent.style.opacity = '1';
-            });
-            
-            // إضافة حالة جديدة في التاريخ
-            history.pushState({ modal: 'content' }, '');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        function openSettings() {
+            document.getElementById('settings-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showAboutUs() {
+            closeModal('settings-modal');
+            document.getElementById('about-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function showContactUs() {
+            closeModal('settings-modal');
+            document.getElementById('contact-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
         }
 
         function toggleDarkMode() {
@@ -1391,155 +860,1669 @@
             document.body.classList.add('dark-mode');
         }
 
-        function openSettings() {
-            document.getElementById('settings-modal').style.display = 'block';
-            // إضافة حالة جديدة في التاريخ
-            history.pushState({ modal: 'settings' }, '');
-        }
+        function getContent(section) {
+            switch(section) {
+                case 'الرقية_بالقرآن':
+                    return `
+                        <div class="ruqya-section">
+                            <div class="ruqya-title">
+                                <i class="fas fa-book-quran"></i>
+                                <h2>الرقية بالقرآن الكريم</h2>
+                            </div>
+                            
+                            <div class="ruqya-section">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-star"></i>
+                                    سورة الفاتحة
+                                </div>
+                                <div class="arabic-text">
+                                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ ﴿١﴾ الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ ﴿٢﴾ الرَّحْمَٰنِ الرَّحِيمِ ﴿٣﴾ مَالِكِ يَوْمِ الدِّينِ ﴿٤﴾ إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ ﴿٥﴾ اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ ﴿٦﴾ صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ ﴿٧﴾
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        عن أبي سعيد الخدري رضي الله عنه أن النبي ﷺ قال: "فاتحة الكتاب شفاء من كل داء"
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه الدارمي
+                                    </div>
+                                </div>
+                            </div>
 
-        function closeSettings() {
-            document.getElementById('settings-modal').style.display = 'none';
-            // الرجوع للحالة السابقة
-            history.back();
-        }
+                            <div class="section-divider"></div>
 
-        function showAboutUs() {
-            closeSettings();
-            document.getElementById('about-modal').style.display = 'block';
-            // إضافة حالة جديدة في التاريخ
-            history.pushState({ modal: 'about' }, '');
-        }
+                            <div class="ruqya-section">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-crown"></i>
+                                    آية الكرسي
+                                </div>
+                                <div class="arabic-text">
+                                    اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ ۚ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الْأَرْضِ ۗ مَن ذَا الَّذِي يَشْفَعُ عِندَهُ إِلَّا بِإِذْنِهِ ۚ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ ۖ وَلَا يُحِيطُونَ بِشَيْءٍ مِّنْ عِلْمِهِ إِلَّا بِمَا شَاءَ ۚ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالْأَرْضَ ۖ وَلَا يَئُودُهُ حِفْظُهُمَا ۚ وَهُوَ الْعَلِيُّ الْعَظِيمُ
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        عن أبي هريرة رضي الله عنه قال: قال رسول الله ﷺ: "من قرأ آية الكرسي في ليلة لم يزل عليه من الله حافظ ولا يقربه شيطان حتى يصبح"
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه البخاري
+                                    </div>
+                                </div>
+                            </div>
 
-        function showContactUs() {
-            closeSettings();
-            document.getElementById('contact-modal').style.display = 'block';
-            // إضافة حالة جديدة في التاريخ
-            history.pushState({ modal: 'contact' }, '');
-        }
+                            <div class="section-divider"></div>
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).style.display = 'none';
-            // الرجوع للحالة السابقة
-            history.back();
-        }
+                            <div class="ruqya-section">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-shield-alt"></i>
+                                    المعوذات
+                                </div>
+                                <div class="arabic-text">
+                                    قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ ﴿١﴾ مِن شَرِّ مَا خَلَقَ ﴿٢﴾ وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ ﴿٣﴾ وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ ﴿٤﴾ وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ ﴿٥﴾
+                                </div>
+                                <div class="arabic-text">
+                                    قُلْ أَعُوذُ بِرَبِّ النَّاسِ ﴿١﴾ مَلِكِ النَّاسِ ﴿٢﴾ إِلَٰهِ النَّاسِ ﴿٣﴾ مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ ﴿٤﴾ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ ﴿٥﴾ مِنَ الْجِنَّةِ وَالنَّاسِ ﴿٦﴾
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        كان النبي ﷺ يعوذ الحسن والحسين بهذه الكلمات
+                                    </div>
+                                    <div class="hadith-source">
+                                        متفق عليه
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
 
-        function closeContentModal() {
-            const contentModal = document.getElementById('content-modal');
-            contentModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            // الرجوع للحالة السابقة
-            history.back();
-        }
+                case 'الرقية_بالسنة':
+                    return `
+                        <div class="ruqya-section">
+                            <div class="ruqya-title">
+                                <i class="fas fa-hand-holding-medical"></i>
+                                <h2>الرقية من السنة النبوية</h2>
+                                <p class="ruqya-intro">رقى ثابتة من السنة النبوية المطهرة</p>
+                            </div>
 
-        function sendEmail(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
-            
-            // هنا يمكنك إضافة كود إرسال البريد الإلكتروني
-            const mailtoLink = `mailto:your-email@example.com?subject=رسالة من ${name}&body=${message}%0D%0A%0D%0AFrom: ${email}`;
-            window.location.href = mailtoLink;
-            
-            // تنظيف النموذج
-            document.getElementById('name').value = '';
-            document.getElementById('email').value = '';
-            document.getElementById('message').value = '';
-            
-            alert('تم إرسال رسالتك بنجاح!');
-        }
+                            <div class="ruqya-guidelines">
+                                <h3>شروط وآداب الرقية الشرعية</h3>
+                                <ul>
+                                    <li>أن تكون بكلام الله تعالى أو بأسمائه وصفاته</li>
+                                    <li>أن تكون باللسان العربي أو بما يُعرف معناه</li>
+                                    <li>الاعتقاد أن الرقية لا تؤثر بذاتها بل بإذن الله</li>
+                                    <li>أن تكون من الأدعية والأذكار المأثورة</li>
+                                </ul>
+                            </div>
 
-        // التحكم في ظهور زر العودة للأعلى
-        window.onscroll = function() {
-            const scrollButton = document.querySelector('.scroll-to-top');
-            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-                scrollButton.classList.add('visible');
-            } else {
-                scrollButton.classList.remove('visible');
+                            <div class="ruqya-item">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-heart"></i>
+                                    رقية جبريل عليه السلام
+                                </div>
+                                <div class="arabic-text">
+                                    <span class="repeat-badge">3 مرات</span>
+                                    بِسْمِ اللَّهِ أَرْقِيكَ، مِنْ كُلِّ شَيْءٍ يُؤْذِيكَ، مِنْ شَرِّ كُلِّ نَفْسٍ أَوْ عَيْنِ حَاسِدٍ، اللَّهُ يَشْفِيكَ، بِسْمِ اللَّهِ أَرْقِيكَ
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        عن عائشة رضي الله عنها أن جبريل رقى النبي ﷺ بهذه الرقية
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه مسلم
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="ruqya-item">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-pray"></i>
+                                    دعاء الشفاء
+                                </div>
+                                <div class="arabic-text">
+                                    <span class="repeat-badge">7 مرات</span>
+                                    اللَّهُمَّ رَبَّ النَّاسِ، أَذْهِبِ الْبَأْسَ، اشْفِ أَنْتَ الشَّافِي، لَا شِفَاءَ إِلَّا شِفَاؤُكَ، شِفَاءً لَا يُغَادِرُ سَقَمًا
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        كان النبي ﷺ يعود بعض أهله يمسح بيده اليمنى ويقول هذا الدعاء
+                                    </div>
+                                    <div class="hadith-source">
+                                        متفق عليه
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="ruqya-item">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-eye"></i>
+                                    الرقية من العين
+                                </div>
+                                <div class="arabic-text">
+                                    <span class="repeat-badge">3 مرات</span>
+                                    أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّةِ مِنْ شَرِّ مَا خَلَقَ
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        كان النبي ﷺ يعوذ الحسن والحسين بهذه الكلمات
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه البخاري
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="ruqya-item">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-shield-alt"></i>
+                                    رقية المريض بالمعوذات
+                                </div>
+                                <div class="arabic-text">
+                                    <span class="repeat-badge">3 مرات</span>
+                                    قراءة المعوذات: (قُلْ هُوَ اللَّهُ أَحَدٌ) و(قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ) و(قُلْ أَعُوذُ بِرَبِّ النَّاسِ) مع النفث
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        كان النبي ﷺ إذا اشتكى يقرأ على نفسه بالمعوذات وينفث
+                                    </div>
+                                    <div class="hadith-source">
+                                        متفق عليه
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="ruqya-item">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                    رقية الألم
+                                </div>
+                                <div class="arabic-text">
+                                    <span class="repeat-badge">7 مرات</span>
+                                    أَعُوذُ بِعِزَّةِ اللَّهِ وَقُدْرَتِهِ مِنْ شَرِّ مَا أَجِدُ وَأُحَاذِرُ
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        علَّم النبي ﷺ عثمان بن أبي العاص أن يضع يده على موضع الألم ويقول هذه الرقية
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه مسلم
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="ruqya-item">
+                                <div class="ruqya-title">
+                                    <i class="fas fa-star-and-crescent"></i>
+                                    رقية اللدغة والسم
+                                </div>
+                                <div class="arabic-text">
+                                    <span class="repeat-badge">7 مرات</span>
+                                    بِسْمِ اللَّهِ، تُرْبَةُ أَرْضِنَا، بِرِيقَةِ بَعْضِنَا، يُشْفَى سَقِيمُنَا، بِإِذْنِ رَبِّنَا
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        كان النبي ﷺ يقول هذه الرقية للمريض
+                                    </div>
+                                    <div class="hadith-source">
+                                        متفق عليه
+                                    </div>
+                                </div>
+                            </div>
+
+                            <style>
+                                .ruqya-section {
+                                    padding: 20px;
+                                    max-width: 800px;
+                                    margin: 0 auto;
+                                }
+
+                                .ruqya-intro {
+                                    text-align: center;
+                                    color: var(--text-secondary-color);
+                                    margin-bottom: 20px;
+                                }
+
+                                .ruqya-guidelines {
+                                    background: var(--card-bg-color);
+                                    padding: 20px;
+                                    border-radius: 10px;
+                                    margin-bottom: 30px;
+                                }
+
+                                .ruqya-guidelines h3 {
+                                    color: var(--primary-color);
+                                    margin-bottom: 15px;
+                                }
+
+                                .ruqya-guidelines ul {
+                                    list-style-type: none;
+                                    padding-right: 20px;
+                                }
+
+                                .ruqya-guidelines li {
+                                    margin-bottom: 10px;
+                                    position: relative;
+                                }
+
+                                .ruqya-guidelines li:before {
+                                    content: "✓";
+                                    color: var(--primary-color);
+                                    position: absolute;
+                                    right: -20px;
+                                }
+
+                                .ruqya-item {
+                                    background: var(--card-bg-color);
+                                    border-radius: 15px;
+                                    padding: 20px;
+                                    margin-bottom: 20px;
+                                    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                                }
+
+                                .ruqya-item .ruqya-title {
+                                    display: flex;
+                                    align-items: center;
+                                    margin-bottom: 15px;
+                                }
+
+                                .ruqya-item .ruqya-title i {
+                                    margin-left: 10px;
+                                    color: var(--primary-color);
+                                }
+
+                                .arabic-text {
+                                    font-size: 1.2em;
+                                    line-height: 2;
+                                    padding: 15px;
+                                    background: var(--bg-color);
+                                    border-radius: 10px;
+                                    margin-bottom: 15px;
+                                }
+
+                                .repeat-badge {
+                                    display: inline-block;
+                                    background: var(--primary-color);
+                                    color: white;
+                                    padding: 2px 10px;
+                                    border-radius: 15px;
+                                    font-size: 0.8em;
+                                    margin-bottom: 10px;
+                                }
+
+                                .hadith-container {
+                                    border-right: 3px solid var(--primary-color);
+                                    padding-right: 15px;
+                                }
+
+                                .hadith-text {
+                                    color: var(--text-secondary-color);
+                                    margin-bottom: 5px;
+                                }
+
+                                .hadith-source {
+                                    color: var(--primary-color);
+                                    font-size: 0.9em;
+                                }
+
+                                .section-divider {
+                                    height: 1px;
+                                    background: var(--border-color);
+                                    margin: 20px 0;
+                                }
+                            </style>
+                        </div>
+                    `;
+
+                case 'سورة_الكهف':
+                    return `
+                        <div class="surah-section">
+                            <div class="surah-header">
+                                <h2>سورة الكهف</h2>
+                                <p class="surah-info">مكية - 110 آيات</p>
+                            </div>
+                            
+                            <div class="virtues-section">
+                                <h3>فضل سورة الكهف</h3>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        عن أبي الدرداء رضي الله عنه أن النبي ﷺ قال: "من حفظ عشر آيات من أول سورة الكهف عُصم من الدجال"
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه مسلم
+                                    </div>
+                                </div>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        عن أبي سعيد الخدري رضي الله عنه أن النبي ﷺ قال: "من قرأ سورة الكهف في يوم الجمعة أضاء له من النور ما بين الجمعتين"
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه النسائي والبيهقي
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="stories-section">
+                                <h3>قصص سورة الكهف</h3>
+                                
+                                <div class="story-card">
+                                    <h4>1. أصحاب الكهف</h4>
+                                    <p>قصة الفتية المؤمنين الذين لجأوا إلى الكهف فراراً بدينهم، فأنامهم الله 309 سنين ثم بعثهم، وفي قصتهم عبرة للمؤمنين.</p>
+                                </div>
+
+                                <div class="story-card">
+                                    <h4>2. صاحب الجنتين</h4>
+                                    <p>قصة رجلين أحدهما آتاه الله جنتين، فكفر بنعمة الله واغتر بماله، فأهلك الله جنتيه.</p>
+                                </div>
+
+                                <div class="story-card">
+                                    <h4>3. موسى والخضر</h4>
+                                    <p>قصة لقاء موسى عليه السلام بالخضر، وما جرى بينهما من أحداث تبين أن علم الله فوق كل علم.</p>
+                                </div>
+
+                                <div class="story-card">
+                                    <h4>4. ذو القرنين</h4>
+                                    <p>قصة الملك الصالح ذي القرنين الذي مكن الله له في الأرض، وبنى السد العظيم لحماية الناس من يأجوج ومأجوج.</p>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="benefits-section">
+                                <h3>فوائد قراءة سورة الكهف</h3>
+                                <ul class="benefits-list">
+                                    <li>الحماية من فتنة الدجال</li>
+                                    <li>النور يوم القيامة</li>
+                                    <li>المغفرة ما بين الجمعتين</li>
+                                    <li>الحماية والوقاية</li>
+                                </ul>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="tips-section">
+                                <h3>متى تقرأ سورة الكهف؟</h3>
+                                <div class="tip-card">
+                                    <i class="fas fa-clock"></i>
+                                    <p>يستحب قراءتها يوم الجمعة</p>
+                                </div>
+                                <div class="tip-card">
+                                    <i class="fas fa-sync-alt"></i>
+                                    <p>قراءتها يومياً للحماية</p>
+                                </div>
+                                <div class="tip-card">
+                                    <i class="fas fa-book-reader"></i>
+                                    <p>قراءتها في الصلاة</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'السيرة_النبوية':
+                    return `
+                        <div class="prophet-biography">
+                            <div class="biography-header">
+                                <h2>سيرة سيد المرسلين</h2>
+                                <div class="prophet-name">
+                                    <h1>محمد ﷺ</h1>
+                                    <p class="full-name">محمد بن عبد الله بن عبد المطلب بن هاشم بن عبد مناف</p>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="family-section">
+                                <h3>نسبه وعائلته الشريفة</h3>
+                                <div class="family-details">
+                                    <div class="parents">
+                                        <h4>والداه</h4>
+                                        <p><strong>أبوه:</strong> عبد الله بن عبد المطلب (توفي قبل ولادته)</p>
+                                        <p><strong>أمه:</strong> آمنة بنت وهب (توفيت وعمره 6 سنوات)</p>
+                                    </div>
+
+                                    <div class="wives">
+                                        <h4>زوجاته الطاهرات (أمهات المؤمنين)</h4>
+                                        <ul>
+                                            <li>خديجة بنت خويلد (أول زوجاته وأم أولاده إلا إبراهيم)</li>
+                                            <li>سودة بنت زمعة</li>
+                                            <li>عائشة بنت أبي بكر الصديق</li>
+                                            <li>حفصة بنت عمر بن الخطاب</li>
+                                            <li>زينب بنت خزيمة</li>
+                                            <li>أم سلمة هند بنت أبي أمية</li>
+                                            <li>زينب بنت جحش</li>
+                                            <li>جويرية بنت الحارث</li>
+                                            <li>أم حبيبة رملة بنت أبي سفيان</li>
+                                            <li>صفية بنت حيي بن أخطب</li>
+                                            <li>ميمونة بنت الحارث</li>
+                                        </ul>
+                                    </div>
+
+                                    <div class="children">
+                                        <h4>أولاده</h4>
+                                        <p><strong>من خديجة:</strong></p>
+                                        <ul>
+                                            <li>القاسم (وبه كان يكنى)</li>
+                                            <li>زينب</li>
+                                            <li>رقية</li>
+                                            <li>أم كلثوم</li>
+                                            <li>فاطمة الزهراء</li>
+                                            <li>عبد الله (الطيب الطاهر)</li>
+                                        </ul>
+                                        <p><strong>من مارية القبطية:</strong></p>
+                                        <ul>
+                                            <li>إبراهيم</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="life-timeline">
+                                <h3>مراحل حياته ﷺ</h3>
+                                <div class="timeline">
+                                    <div class="event">
+                                        <span class="year">571 م</span>
+                                        <p>ولادته في عام الفيل</p>
+                                    </div>
+                                    <div class="event">
+                                        <span class="year">575 م</span>
+                                        <p>وفاة أمه آمنة</p>
+                                    </div>
+                                    <div class="event">
+                                        <span class="year">578 م</span>
+                                        <p>وفاة جده عبد المطلب</p>
+                                    </div>
+                                    <div class="event">
+                                        <span class="year">595 م</span>
+                                        <p>زواجه من خديجة</p>
+                                    </div>
+                                    <div class="event">
+                                        <span class="year">610 م</span>
+                                        <p>نزول الوحي في غار حراء</p>
+                                    </div>
+                                    <div class="event">
+                                        <span class="year">622 م</span>
+                                        <p>الهجرة إلى المدينة</p>
+                                    </div>
+                                    <div class="event">
+                                        <span class="year">632 م</span>
+                                        <p>وفاته ﷺ</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="battles-section">
+                                <h3>غزواته ﷺ</h3>
+                                <div class="battles-grid">
+                                    <div class="battle-card">
+                                        <h4>غزوة بدر الكبرى</h4>
+                                        <p><strong>التاريخ:</strong> 17 رمضان 2 هـ</p>
+                                        <p><strong>النتيجة:</strong> نصر المسلمين</p>
+                                        <p>أول معركة كبرى في الإسلام</p>
+                                    </div>
+
+                                    <div class="battle-card">
+                                        <h4>غزوة أُحد</h4>
+                                        <p><strong>التاريخ:</strong> 15 شوال 3 هـ</p>
+                                        <p><strong>النتيجة:</strong> انتصار قريش</p>
+                                        <p>استشهاد حمزة رضي الله عنه</p>
+                                    </div>
+
+                                    <div class="battle-card">
+                                        <h4>غزوة الخندق</h4>
+                                        <p><strong>التاريخ:</strong> شوال 5 هـ</p>
+                                        <p><strong>النتيجة:</strong> نصر المسلمين</p>
+                                        <p>حفر الخندق حول المدينة</p>
+                                    </div>
+
+                                    <div class="battle-card">
+                                        <h4>فتح مكة</h4>
+                                        <p><strong>التاريخ:</strong> رمضان 8 هـ</p>
+                                        <p><strong>النتيجة:</strong> فتح مكة</p>
+                                        <p>دخول الناس في دين الله أفواجاً</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="characteristics-section">
+                                <h3>صفاته وأخلاقه ﷺ</h3>
+                                
+                                <div class="physical-traits">
+                                    <h4>صفاته الخَلقية</h4>
+                                    <ul>
+                                        <li>كان ربعة من القوم، ليس بالطويل البائن ولا بالقصير</li>
+                                        <li>أبيض اللون مشرب بحمرة</li>
+                                        <li>أحسن الناس وجهاً وأنورهم</li>
+                                        <li>شعره أسود، لا بالسبط ولا بالجعد</li>
+                                        <li>واسع الجبين، أزج الحواجب</li>
+                                        <li>أدعج العينين، أهدب الأشفار</li>
+                                        <li>كث اللحية، حسن الفم</li>
+                                    </ul>
+                                </div>
+
+                                <div class="moral-traits">
+                                    <h4>صفاته الخُلقية</h4>
+                                    <ul>
+                                        <li>أصدق الناس حديثاً</li>
+                                        <li>أعظمهم أمانة</li>
+                                        <li>أشدهم تواضعاً</li>
+                                        <li>أرحم الناس بالضعفاء</li>
+                                        <li>أشجع الناس في المواقف</li>
+                                        <li>أكرم الناس وأجودهم</li>
+                                        <li>أحلم الناس عند الغضب</li>
+                                        <li>أعف الناس عما حرم الله</li>
+                                    </ul>
+                                </div>
+
+                                <div class="daily-life">
+                                    <h4>من هديه في حياته اليومية</h4>
+                                    <ul>
+                                        <li>يبدأ من لقيه بالسلام</li>
+                                        <li>يجيب دعوة من دعاه</li>
+                                        <li>لا يرد هدية</li>
+                                        <li>يمزح ولا يقول إلا حقاً</li>
+                                        <li>يخصف نعله ويرقع ثوبه بيده</li>
+                                        <li>يعود المريض ويشهد الجنازة</li>
+                                        <li>يحب التيمن في شأنه كله</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="miracles-section">
+                                <h3>معجزاته ﷺ</h3>
+                                <div class="miracles-grid">
+                                    <div class="miracle-card">
+                                        <h4>القرآن الكريم</h4>
+                                        <p>المعجزة الخالدة إلى يوم القيامة</p>
+                                    </div>
+                                    <div class="miracle-card">
+                                        <h4>الإسراء والمعراج</h4>
+                                        <p>رحلته الليلية من مكة إلى بيت المقدس ثم إلى السماوات العلى</p>
+                                    </div>
+                                    <div class="miracle-card">
+                                        <h4>انشقاق القمر</h4>
+                                        <p>انشق القمر فلقتين بإذن الله</p>
+                                    </div>
+                                    <div class="miracle-card">
+                                        <h4>نبع الماء</h4>
+                                        <p>نبع الماء من بين أصابعه الشريفة</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'قصص_الأنبياء':
+                    return `
+                        <div class="prophets-section">
+                            <div class="section-header">
+                                <h2>قصص الأنبياء</h2>
+                                <p>سير وقصص الأنبياء عليهم السلام</p>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>آدم عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>أول الأنبياء</strong></p>
+                                    <p><strong>زوجته:</strong> حواء</p>
+                                    <p><strong>أبناؤه:</strong> قابيل، هابيل، شيث وغيرهم</p>
+                                    <p><strong>عمره:</strong> 930 سنة</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>خلقه الله بيده من طين، ونفخ فيه من روحه، وعلمه الأسماء كلها. أسكنه الله الجنة مع زوجته حواء، ثم أكلا من الشجرة فأهبطا إلى الأرض. تاب الله عليهما وجعله أول نبي للبشرية.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>نوح عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>أول الرسل</strong></p>
+                                    <p><strong>أبناؤه:</strong> سام، حام، يافث</p>
+                                    <p><strong>عمره:</strong> 950 سنة</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>دعا قومه 950 سنة إلى عبادة الله وحده. أمره الله ببناء السفينة، وحمل فيها من كل زوجين اثنين والمؤمنين. نجاه الله من الطوفان وأغرق الكافرين.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>إبراهيم عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>خليل الرحمن</strong></p>
+                                    <p><strong>زوجاته:</strong> سارة، هاجر</p>
+                                    <p><strong>أبناؤه:</strong> إسماعيل، إسحاق</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>حطم الأصنام ودعا إلى التوحيد. ألقي في النار فجعلها الله برداً وسلاماً. بنى الكعبة مع ابنه إسماعيل. امتحنه الله بذبح ابنه إسماعيل ففداه الله بذبح عظيم.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>موسى عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>كليم الله</strong></p>
+                                    <p><strong>زوجته:</strong> صفورة بنت شعيب</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>نشأ في قصر فرعون. كلمه الله تعالى وأعطاه المعجزات. أرسله الله لفرعون وقومه. نجاه الله وقومه من فرعون بانفلاق البحر. أنزل الله عليه التوراة.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>عيسى عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>روح الله وكلمته</strong></p>
+                                    <p><strong>والدته:</strong> مريم العذراء</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>ولد من غير أب بكلمة "كن". تكلم في المهد. أيده الله بالمعجزات كإحياء الموتى وإبراء الأكمه والأبرص. رفعه الله إليه وسينزل في آخر الزمان.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>يوسف عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>الصديق</strong></p>
+                                    <p><strong>والده:</strong> يعقوب عليه السلام</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>ألقاه إخوته في البئر. بيع في مصر وتعرض للفتنة فصبر. سجن ظلماً ثم أصبح عزيز مصر. عفا عن إخوته وجمع شمل عائلته.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>داود عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>صاحب الزبور</strong></p>
+                                    <p><strong>ملك وحاكم</strong></p>
+                                </div>
+                                <div class="story-content">
+                                    <p>آتاه الله الملك والحكمة. ألان الله له الحديد. كان يسبح الجبال والطير معه. أوتي صوتاً جميلاً في تلاوة الزبور.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>سليمان عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>الملك النبي</strong></p>
+                                    <p><strong>والده:</strong> داود عليه السلام</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>ورث الملك والنبوة عن أبيه. سخر الله له الريح والجن والطير. فهم منطق الطير والحيوان. بنى بيت المقدس.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>أيوب عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>نبي الصبر</strong></p>
+                                    <p><strong>زوجته:</strong> رحمة</p>
+                                </div>
+                                <div class="story-content">
+                                    <p>ابتلاه الله في ماله وأهله وجسده فصبر. استمر بلاؤه 18 عاماً. شفاه الله وأعاد إليه أهله ومثلهم معهم.</p>
+                                </div>
+                            </div>
+
+                            <div class="prophet-story">
+                                <h3>يونس عليه السلام</h3>
+                                <div class="prophet-info">
+                                    <p><strong>صاحب الحوت</strong></p>
+                                </div>
+                                <div class="story-content">
+                                    <p>التقمه الحوت وبقي في بطنه. سبح الله في الظلمات فنجاه. عاد إلى قومه فآمنوا جميعاً.</p>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="lessons-section">
+                                <h3>دروس وعبر من قصص الأنبياء</h3>
+                                <ul>
+                                    <li>الصبر على البلاء والثبات على الحق</li>
+                                    <li>التوكل على الله في جميع الأمور</li>
+                                    <li>الدعوة إلى الله بالحكمة والموعظة الحسنة</li>
+                                    <li>العفو والصفح عند المقدرة</li>
+                                    <li>الابتلاء سنة من سنن الله في خلقه</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+
+                case 'قصص_الصحابة':
+                    return `
+                        <div class="companions-section">
+                            <div class="section-header">
+                                <h2>قصص الصحابة رضوان الله عليهم</h2>
+                                <p class="section-intro">سير وقصص صحابة رسول الله ﷺ الذين نقلوا لنا الدين وضحوا بأرواحهم في سبيل الله</p>
+                            </div>
+
+                            <div class="companions-grid">
+                                <!-- العشرة المبشرون بالجنة -->
+                                <div class="companion-category">
+                                    <h3>العشرة المبشرون بالجنة</h3>
+                                    
+                                    <div class="companion-card">
+                                        <h4>أبو بكر الصديق رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>اسمه:</strong> عبد الله بن عثمان التيمي القرشي</p>
+                                            <p><strong>لقبه:</strong> الصديق، العتيق</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>أول الرجال إيماناً</li>
+                                                <li>صاحب النبي ﷺ في الهجرة</li>
+                                                <li>أول الخلفاء الراشدين</li>
+                                                <li>أنفق كل ماله في سبيل الله</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 13 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>عمر بن الخطاب رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>اسمه:</strong> عمر بن الخطاب العدوي القرشي</p>
+                                            <p><strong>لقبه:</strong> الفاروق</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>أعز الله به الإسلام</li>
+                                                <li>أول من سمي أمير المؤمنين</li>
+                                                <li>وافق القرآن رأيه في مواضع</li>
+                                                <li>فتحت في عهده أكثر الأمصار</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 23 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>عثمان بن عفان رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>اسمه:</strong> عثمان بن عفان الأموي القرشي</p>
+                                            <p><strong>لقبه:</strong> ذو النورين</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>جمع القرآن في مصحف واحد</li>
+                                                <li>جهز جيش العسرة</li>
+                                                <li>تزوج ببنتي النبي ﷺ</li>
+                                                <li>حيي كريم</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 35 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>علي بن أبي طالب رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>اسمه:</strong> علي بن أبي طالب الهاشمي القرشي</p>
+                                            <p><strong>لقبه:</strong> أبو تراب</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>أول الصبيان إيماناً</li>
+                                                <li>باب مدينة العلم</li>
+                                                <li>زوج فاطمة رضي الله عنها</li>
+                                                <li>شجاع الإسلام</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 40 هـ</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- أهل بيت النبي ﷺ -->
+                                <div class="companion-category">
+                                    <h3>أهل بيت النبي ﷺ</h3>
+                                    
+                                    <div class="companion-card">
+                                        <h4>الحسن بن علي رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>نسبه:</strong> سبط رسول الله ﷺ</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>أشبه الناس برسول الله ﷺ</li>
+                                                <li>سيد شباب أهل الجنة</li>
+                                                <li>تنازل عن الخلافة حقناً للدماء</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 50 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>الحسين بن علي رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>نسبه:</strong> سبط رسول الله ﷺ</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>ريحانة رسول الله ﷺ</li>
+                                                <li>سيد شباب أهل الجنة</li>
+                                                <li>استشهد في كربلاء</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 61 هـ</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- المهاجرون الأولون -->
+                                <div class="companion-category">
+                                    <h3>المهاجرون الأولون</h3>
+                                    
+                                    <div class="companion-card">
+                                        <h4>خالد بن الوليد رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>لقبه:</strong> سيف الله المسلول</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>قائد عسكري فذ</li>
+                                                <li>لم يُهزم في معركة</li>
+                                                <li>فتح الشام والعراق</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 21 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>سعد بن أبي وقاص رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>أول من رمى بسهم في سبيل الله</li>
+                                                <li>فاتح العراق</li>
+                                                <li>أحد العشرة المبشرين بالجنة</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 55 هـ</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- الأنصار -->
+                                <div class="companion-category">
+                                    <h3>الأنصار</h3>
+                                    
+                                    <div class="companion-card">
+                                        <h4>سعد بن معاذ رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>اهتز عرش الرحمن لموته</li>
+                                                <li>سيد الأوس</li>
+                                                <li>حكم في بني قريظة</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 5 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>أبو أيوب الأنصاري رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>اسمه:</strong> خالد بن زيد</p>
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>نزل عنده النبي ﷺ في المدينة</li>
+                                                <li>شهد بدراً وأحداً</li>
+                                                <li>استشهد في القسطنطينية</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 52 هـ</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- الصحابيات -->
+                                <div class="companion-category">
+                                    <h3>الصحابيات الجليلات</h3>
+                                    
+                                    <div class="companion-card">
+                                        <h4>فاطمة الزهراء رضي الله عنها</h4>
+                                        <div class="companion-info">
+                                            <p><strong>نسبها:</strong> بنت رسول الله ﷺ</p>
+                                            <p><strong>مناقبها:</strong></p>
+                                            <ul>
+                                                <li>سيدة نساء العالمين</li>
+                                                <li>بضعة من النبي ﷺ</li>
+                                                <li>أم الحسن والحسين</li>
+                                            </ul>
+                                            <p><strong>وفاتها:</strong> 11 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>عائشة رضي الله عنها</h4>
+                                        <div class="companion-info">
+                                            <p><strong>نسبها:</strong> بنت أبي بكر الصديق</p>
+                                            <p><strong>مناقبها:</strong></p>
+                                            <ul>
+                                                <li>أم المؤمنين</li>
+                                                <li>أفقه النساء</li>
+                                                <li>الصديقة بنت الصديق</li>
+                                                <li>روت أكثر من 2000 حديث</li>
+                                            </ul>
+                                            <p><strong>وفاتها:</strong> 58 هـ</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- صحابة آخرون -->
+                                <div class="companion-category">
+                                    <h3>صحابة آخرون</h3>
+                                    
+                                    <div class="companion-card">
+                                        <h4>بلال بن رباح رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>أول مؤذن في الإسلام</li>
+                                                <li>صبر على التعذيب في مكة</li>
+                                                <li>خازن بيت مال المسلمين</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 20 هـ</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="companion-card">
+                                        <h4>سلمان الفارسي رضي الله عنه</h4>
+                                        <div class="companion-info">
+                                            <p><strong>مناقبه:</strong></p>
+                                            <ul>
+                                                <li>صاحب فكرة حفر الخندق</li>
+                                                <li>من أهل البيت</li>
+                                                <li>أول والي على المدائن</li>
+                                            </ul>
+                                            <p><strong>وفاته:</strong> 36 هـ</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'أعلام_الأمة':
+                    return `
+                        <div class="scholars-section">
+                            <div class="scholars-header">
+                                <h2>أعلام الأمة</h2>
+                                <p>الأئمة الأربعة وسيرهم العطرة</p>
+                            </div>
+
+                            <div class="scholar-card">
+                                <h3>الإمام أبو حنيفة النعمان</h3>
+                                <div class="scholar-info">
+                                    <p class="title">إمام المذهب الحنفي (80 - 150 هـ)</p>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <h4>نشأته</h4>
+                                            <p>ولد في الكوفة من أصول فارسية، نشأ في بيت علم وتجارة. كان يعمل في تجارة القماش قبل تفرغه للعلم.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>شيوخه</h4>
+                                            <p>تتلمذ على يد حماد بن أبي سليمان لمدة 18 عاماً، وأخذ عن التابعين مثل عطاء بن أبي رباح وعكرمة.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>منهجه</h4>
+                                            <p>اشتهر بالقياس والرأي في الفقه، وكان يفترض المسائل قبل وقوعها. أسس منهجية فقهية تقوم على الكتاب والسنة والإجماع والقياس.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>مؤلفاته وتلاميذه</h4>
+                                            <ul>
+                                                <li>الفقه الأكبر في العقيدة</li>
+                                                <li>المسند في الحديث</li>
+                                                <li>من تلاميذه: أبو يوسف القاضي ومحمد بن الحسن الشيباني</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scholar-card">
+                                <h3>الإمام مالك بن أنس</h3>
+                                <div class="scholar-info">
+                                    <p class="title">إمام دار الهجرة (93 - 179 هـ)</p>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <h4>نشأته</h4>
+                                            <p>ولد في المدينة المنورة في بيت علم وحديث. نشأ في المدينة وطلب العلم فيها منذ صغره.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>شيوخه</h4>
+                                            <p>أخذ عن نافع مولى ابن عمر، والزهري، وربيعة الرأي. جلس للفتيا وعمره 17 سنة بعد أن أجازه 70 من شيوخ المدينة.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>منهجه</h4>
+                                            <p>اعتمد على عمل أهل المدينة كمصدر للتشريع. كان شديد التحري في الحديث، لا يحدث إلا وهو على طهارة.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>مؤلفاته وتلاميذه</h4>
+                                            <ul>
+                                                <li>الموطأ: أول كتاب صحيح مدون في الحديث</li>
+                                                <li>المدونة الكبرى في الفقه</li>
+                                                <li>من تلاميذه: الإمام الشافعي وعبد الله بن وهب</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scholar-card">
+                                <h3>الإمام محمد بن إدريس الشافعي</h3>
+                                <div class="scholar-info">
+                                    <p class="title">مؤسس علم أصول الفقه (150 - 204 هـ)</p>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <h4>نشأته</h4>
+                                            <p>ولد في غزة وحمل إلى مكة وهو صغير. حفظ القرآن وهو ابن سبع سنين، وحفظ الموطأ وهو ابن عشر.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>شيوخه</h4>
+                                            <p>تتلمذ على يد الإمام مالك في المدينة، وأخذ عن محمد بن الحسن في العراق، فجمع بين فقه الحجاز والعراق.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>منهجه</h4>
+                                            <p>أسس علم أصول الفقه في كتابه الرسالة. جمع بين مدرستي الحديث والرأي. له مذهبان قديم في العراق وجديد في مصر.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>مؤلفاته وتلاميذه</h4>
+                                            <ul>
+                                                <li>الرسالة في أصول الفقه</li>
+                                                <li>الأم في الفقه</li>
+                                                <li>من تلاميذه: الإمام أحمد والمزني والربيع المرادي</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="scholar-card">
+                                <h3>الإمام أحمد بن حنبل</h3>
+                                <div class="scholar-info">
+                                    <p class="title">إمام أهل السنة (164 - 241 هـ)</p>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <h4>نشأته</h4>
+                                            <p>ولد في بغداد ونشأ يتيماً. بدأ طلب العلم في صغره، ورحل في طلب الحديث إلى الكوفة والبصرة ومكة واليمن.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>شيوخه</h4>
+                                            <p>تتلمذ على يد الإمام الشافعي في بغداد، وأخذ عن هشيم بن بشير وسفيان بن عيينة وغيرهم.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>منهجه ومحنته</h4>
+                                            <p>عرف بتمسكه بالسنة وشدة اتباعه للنصوص. صبر في محنة خلق القرآن ورفض القول بخلقه رغم السجن والتعذيب.</p>
+                                        </div>
+                                        <div class="info-item">
+                                            <h4>مؤلفاته وتلاميذه</h4>
+                                            <ul>
+                                                <li>المسند: يحوي أكثر من 30 ألف حديث</li>
+                                                <li>كتاب الزهد والورع</li>
+                                                <li>من تلاميذه: البخاري ومسلم وأبو داود</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <style>
+                                .scholars-section {
+                                    padding: 20px;
+                                    max-width: 1200px;
+                                    margin: 0 auto;
+                                }
+
+                                .scholar-card {
+                                    background: var(--card-bg-color);
+                                    border-radius: 15px;
+                                    padding: 20px;
+                                    margin-bottom: 25px;
+                                    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                                }
+
+                                .scholar-card h3 {
+                                    color: var(--primary-color);
+                                    font-size: 1.5em;
+                                    margin-bottom: 10px;
+                                }
+
+                                .title {
+                                    color: var(--text-secondary-color);
+                                    font-size: 1.1em;
+                                    margin-bottom: 20px;
+                                }
+
+                                .info-grid {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                                    gap: 20px;
+                                }
+
+                                .info-item {
+                                    padding: 15px;
+                                    background: var(--bg-color);
+                                    border-radius: 10px;
+                                }
+
+                                .info-item h4 {
+                                    color: var(--primary-color);
+                                    margin-bottom: 10px;
+                                    font-size: 1.1em;
+                                }
+
+                                .info-item p {
+                                    line-height: 1.6;
+                                    margin-bottom: 10px;
+                                }
+
+                                .info-item ul {
+                                    list-style-type: none;
+                                    padding-right: 20px;
+                                }
+
+                                .info-item ul li {
+                                    margin-bottom: 8px;
+                                    position: relative;
+                                }
+
+                                .info-item ul li:before {
+                                    content: "•";
+                                    color: var(--primary-color);
+                                    position: absolute;
+                                    right: -15px;
+                                }
+
+                                @media (max-width: 768px) {
+                                    .info-grid {
+                                        grid-template-columns: 1fr;
+                                    }
+                                }
+                            </style>
+                        </div>
+                    `;
+
+                case 'أذكار_الصباح':
+                    return `
+                        <div class="athkar-section morning-athkar">
+                            <div class="section-header">
+                                <h2>أذكار الصباح</h2>
+                                <div class="timing-info">
+                                    <h3>وقت الأذكار</h3>
+                                    <p>من طلوع الفجر إلى طلوع الشمس</p>
+                                    <div class="virtues">
+                                        <h4>فضل أذكار الصباح</h4>
+                                        <ul>
+                                            <li>حصن من الشيطان طوال اليوم</li>
+                                            <li>حفظ من كل سوء ومكروه</li>
+                                            <li>بركة في العمل والرزق</li>
+                                            <li>راحة نفسية وطمأنينة قلبية</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="athkar-container">
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">1</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">مرة واحدة</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        آية الكرسي: اللَّهُ لَا إِلَٰهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ۚ لَا تَأْخُذُهُ سِنَةٌ وَلَا نَوْمٌ...
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قرأها حين يصبح أجير من الجن حتى يمسي</p>
+                                        </div>
+                                        <div class="hadith-source">رواه النسائي</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">2</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">3 مرات</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        بِسْمِ اللهِ الَّذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ وَهُوَ السَّمِيعُ الْعَلِيمُ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها ثلاث مرات حين يصبح لم يضره شيء</p>
+                                        </div>
+                                        <div class="hadith-source">رواه أبو داود والترمذي</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">3</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">100 مرة</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        سُبْحَانَ اللهِ وَبِحَمْدِهِ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها مائة مرة حين يصبح وحين يمسي لم يأت أحد يوم القيامة بأفضل مما جاء به إلا أحد قال مثل ما قال أو زاد عليه</p>
+                                        </div>
+                                        <div class="hadith-source">رواه مسلم</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">4</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">3 مرات</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها ثلاث مرات حين يصبح كان حقاً على الله أن يعافيه</p>
+                                        </div>
+                                        <div class="hadith-source">رواه أبو داود</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">5</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">7 مرات</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها سبع مرات حين يصبح كفاه الله ما أهمه من أمر الدنيا والآخرة</p>
+                                        </div>
+                                        <div class="hadith-source">رواه ابن السني</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'أذكار_المساء':
+                    return `
+                        <div class="athkar-section evening-athkar">
+                            <div class="section-header">
+                                <h2>أذكار المساء</h2>
+                                <div class="timing-info">
+                                    <h3>وقت الأذكار</h3>
+                                    <p>من بعد صلاة العصر إلى غروب الشمس</p>
+                                    <div class="virtues">
+                                        <h4>فضل أذكار المساء</h4>
+                                        <ul>
+                                            <li>حماية من شر الليل وظلمته</li>
+                                            <li>أمان من الكوابيس والأحلام المزعجة</li>
+                                            <li>راحة وسكينة في النوم</li>
+                                            <li>حفظ من كل شر حتى الصباح</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="athkar-container">
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">1</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">مرة واحدة</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها حين يمسي أدى شكر يومه</p>
+                                        </div>
+                                        <div class="hadith-source">رواه أبو داود</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">2</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">3 مرات</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها ثلاث مرات حين يمسي لم تضره حمة تلك الليلة</p>
+                                        </div>
+                                        <div class="hadith-source">رواه الترمذي</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">3</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">4 مرات</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ، وَأُشْهِدُ حَمَلَةَ عَرْشِكَ، وَمَلَائِكَتَكَ، وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ، وَأَنَّ مُحَمَّدًا عَبْدُكَ وَرَسُولُكَ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها أربع مرات حين يمسي أعتقه الله من النار</p>
+                                        </div>
+                                        <div class="hadith-source">رواه أبو داود</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">4</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">3 مرات</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ، وَقَهْرِ الرِّجَالِ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>كان النبي ﷺ يقولها في المساء</p>
+                                        </div>
+                                        <div class="hadith-source">رواه أبو داود</div>
+                                    </div>
+                                </div>
+
+                                <div class="thikr-card">
+                                    <div class="thikr-header">
+                                        <span class="thikr-number">5</span>
+                                        <div class="thikr-info">
+                                            <span class="repeat-badge">1 مرة</span>
+                                        </div>
+                                    </div>
+                                    <div class="arabic-text">
+                                        اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ
+                                    </div>
+                                    <div class="hadith-container">
+                                        <div class="hadith-text">
+                                            <p>من قالها موقناً بها حين يمسي فمات من ليلته دخل الجنة</p>
+                                        </div>
+                                        <div class="hadith-source">رواه البخاري</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+
+                case 'سورة_الملك':
+                    return `
+                        <div class="surah-section">
+                            <div class="surah-header">
+                                <h2>سورة الملك</h2>
+                                <p class="surah-info">مكية - 30 آية</p>
+                            </div>
+
+                            <div class="virtues-section">
+                                <h3>فضل سورة الملك</h3>
+                                <div class="hadith-container">
+                                    <div class="hadith-text">
+                                        عن أبي هريرة رضي الله عنه أن النبي ﷺ قال: "إِنَّ سُورَةً مِنَ الْقُرْآنِ ثَلاَثُونَ آيَةً شَفَعَتْ لِرَجُلٍ حَتَّى غُفِرَ لَهُ وَهِيَ: تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ"
+                                    </div>
+                                    <div class="hadith-source">
+                                        رواه الترمذي وأبو داود
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="surah-text">
+                                <h3>نص السورة</h3>
+                                <div class="arabic-text">
+                                    بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+
+                                    تَبَارَكَ الَّذِي بِيَدِهِ الْمُلْكُ وَهُوَ عَلَىٰ كُلِّ شَيْءٍ قَدِيرٌ ﴿١﴾ الَّذِي خَلَقَ الْمَوْتَ وَالْحَيَاةَ لِيَبْلُوَكُمْ أَيُّكُمْ أَحْسَنُ عَمَلًا ۚ وَهُوَ الْعَزِيزُ الْغَفُورُ ﴿٢﴾ الَّذِي خَلَقَ سَبْعَ سَمَاوَاتٍ طِبَاقًا ۖ مَّا تَرَىٰ فِي خَلْقِ الرَّحْمَٰنِ مِن تَفَاوُتٍ ۖ فَارْجِعِ الْبَصَرَ هَلْ تَرَىٰ مِن فُطُورٍ ﴿٣﴾ ثُمَّ ارْجِعِ الْبَصَرَ كَرَّتَيْنِ يَنقَلِبْ إِلَيْكَ الْبَصَرُ خَاسِئًا وَهُوَ حَسِيرٌ ﴿٤﴾ وَلَقَدْ زَيَّنَّا السَّمَاءَ الدُّنْيَا بِمَصَابِيحَ وَجَعَلْنَاهَا رُجُومًا لِّلشَّيَاطِينِ ۖ وَأَعْتَدْنَا لَهُمْ عَذَابَ السَّعِيرِ ﴿٥﴾
+
+                                    وَلِلَّذِينَ كَفَرُوا بِرَبِّهِمْ عَذَابُ جَهَنَّمَ ۖ وَبِئْسَ الْمَصِيرُ ﴿٦﴾ إِذَا أُلْقُوا فِيهَا سَمِعُوا لَهَا شَهِيقًا وَهِيَ تَفُورُ ﴿٧﴾ تَكَادُ تَمَيَّزُ مِنَ الْغَيْظِ ۚ كُلَّمَا أُلْقِيَ فِيهَا فَوْجٌ سَأَلَهُمْ خَزَنَتُهَا أَلَمْ يَأْتِكُمْ نَذِيرٌ ﴿٨﴾ قَالُوا بَلَىٰ قَدْ جَاءَنَا نَذِيرٌ فَكَذَّبْنَا وَقُلْنَا مَا نَزَّلَ اللَّهُ مِن شَيْءٍ إِنْ أَنتُمْ إِلَّا فِي ضَلَالٍ كَبِيرٍ ﴿٩﴾ وَقَالُوا لَوْ كُنَّا نَسْمَعُ أَوْ نَعْقِلُ مَا كُنَّا فِي أَصْحَابِ السَّعِيرِ ﴿١٠﴾
+
+                                    فَاعْتَرَفُوا بِذَنبِهِمْ فَسُحْقًا لِّأَصْحَابِ السَّعِيرِ ﴿١١﴾ إِنَّ الَّذِينَ يَخْشَوْنَ رَبَّهُم بِالْغَيْبِ لَهُم مَّغْفِرَةٌ وَأَجْرٌ كَبِيرٌ ﴿١٢﴾ وَأَسِرُّوا قَوْلَكُمْ أَوِ اجْهَرُوا بِهِ ۖ إِنَّهُ عَلِيمٌ بِذَاتِ الصُّدُورِ ﴿١٣﴾ أَلَا يَعْلَمُ مَنْ خَلَقَ وَهُوَ اللَّطِيفُ الْخَبِيرُ ﴿١٤﴾
+
+                                    هُوَ الَّذِي جَعَلَ لَكُمُ الْأَرْضَ ذَلُولًا فَامْشُوا فِي مَنَاكِبِهَا وَكُلُوا مِن رِّزْقِهِ ۖ وَإِلَيْهِ النُّشُورُ ﴿١٥﴾ أَأَمِنتُم مَّن فِي السَّمَاءِ أَن يَخْسِفَ بِكُمُ الْأَرْضَ فَإِذَا هِيَ تَمُورُ ﴿١٦﴾ أَمْ أَمِنتُم مَّن فِي السَّمَاءِ أَن يُرْسِلَ عَلَيْكُمْ حَاصِبًا ۖ فَسَتَعْلَمُونَ كَيْفَ نَذِيرِ ﴿١٧﴾
+
+                                    وَلَقَدْ كَذَّبَ الَّذِينَ مِن قَبْلِهِمْ فَكَيْفَ كَانَ نَكِيرِ ﴿١٨﴾ أَوَلَمْ يَرَوْا إِلَى الطَّيْرِ فَوْقَهُمْ صَافَّاتٍ وَيَقْبِضْنَ ۖ مَا يُمْسِكُهُنَّ إِلَّا الرَّحْمَٰنُ ۚ إِنَّهُ بِكُلِّ شَيْءٍ بَصِيرٌ ﴿١٩﴾ أَمَّنْ هَٰذَا الَّذِي هُوَ جُندٌ لَّكُمْ يَنصُرُكُم مِن دُونِ الرَّحْمَٰنِ ۚ إِنِ الْكَافِرُونَ إِلَّا فِي غُرُورٍ ﴿٢٠﴾
+
+                                    أَمَّنْ هَٰذَا الَّذِي يَرْزُقُكُمْ إِنْ أَمْسَكَ رِزْقَهُ ۚ بَل لَّجُّوا فِي عُتُوٍّ وَنُفُورٍ ﴿٢١﴾ أَفَمَن يَمْشِي مُكِبًّا عَلَىٰ وَجْهِهِ أَهْدَىٰ أَمَّن يَمْشِي سَوِيًّا عَلَىٰ صِرَاطٍ مُّسْتَقِيمٍ ﴿٢٢﴾ قُلْ هُوَ الَّذِي أَنشَأَكُمْ وَجَعَلَ لَكُمُ السَّمْعَ وَالْأَبْصَارَ وَالْأَفْئِدَةَ ۖ قَلِيلًا مَّا تَشْكُرُونَ ﴿٢٣﴾ قُلْ هُوَ الَّذِي ذَرَأَكُمْ فِي الْأَرْضِ وَإِلَيْهِ تُحْشَرُونَ ﴿٢٤﴾
+
+                                    وَيَقُولُونَ مَتَىٰ هَٰذَا الْوَعْدُ إِن كُنتُمْ صَادِقِينَ ﴿٢٥﴾ قُلْ إِنَّمَا الْعِلْمُ عِندَ اللَّهِ وَإِنَّمَا أَنَا نَذِيرٌ مُّبِينٌ ﴿٢٦﴾ فَلَمَّا رَأَوْهُ زُلْفَةً سِيئَتْ وُجُوهُ الَّذِينَ كَفَرُوا وَقِيلَ هَٰذَا الَّذِي كُنتُم بِهِ تَدَّعُونَ ﴿٢٧﴾ قُلْ أَرَأَيْتُمْ إِنْ أَهْلَكَنِيَ اللَّهُ وَمَن مَّعِيَ أَوْ رَحِمَنَا فَمَن يُجِيرُ الْكَافِرِينَ مِنْ عَذَابٍ أَلِيمٍ ﴿٢٨﴾ قُلْ هُوَ الرَّحْمَٰنُ آمَنَّا بِهِ وَعَلَيْهِ تَوَكَّلْنَا ۖ فَسَتَعْلَمُونَ مَنْ هُوَ فِي ضَلَالٍ مُّبِينٍ ﴿٢٩﴾ قُلْ أَرَأَيْتُمْ إِنْ أَصْبَحَ مَاؤُكُمْ غَوْرًا فَمَن يَأْتِيكُم بِمَاءٍ مَّعِينٍ ﴿٣٠﴾
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="tafsir-section">
+                                <h3>تفسير مختصر</h3>
+                                <div class="tafsir-content">
+                                    <p>تبدأ السورة بتعظيم الله تعالى وبيان قدرته المطلقة على كل شيء، ثم تتحدث عن خلق الموت والحياة كاختبار للبشر.</p>
+                                    <p>تصف السورة عظمة خلق السماوات، وتتحدث عن مصير الكافرين في جهنم، وتذكر نعم الله على عباده.</p>
+                                    <p>تختم السورة بتذكير الناس بقدرة الله على إهلاكهم، وأنه لا منجي لهم إلا هو سبحانه.</p>
+                                </div>
+                            </div>
+
+                            <div class="section-divider"></div>
+
+                            <div class="benefits-section">
+                                <h3>فوائد قراءة سورة الملك</h3>
+                                <ul class="benefits-list">
+                                    <li>الشفاعة لقارئها يوم القيامة</li>
+                                    <li>النجاة من عذاب القبر</li>
+                                    <li>المغفرة من الذنوب</li>
+                                    <li>الحماية والوقاية</li>
+                                    <li>تكفير السيئات</li>
+                                    <li>زيادة الحسنات</li>
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+
+                case 'اتصل_بنا':
+                    return `
+                        <div class="contact-section">
+                            <div class="section-header">
+                                <h2>اتصل بنا</h2>
+                                <p>يسعدنا تواصلكم معنا وتلقي استفساراتكم واقتراحاتكم</p>
+                            </div>
+
+                            <div class="contact-form-container">
+                                <div id="alert-success" class="alert alert-success" style="display: none;">
+                                    تم إرسال رسالتك بنجاح!
+                                </div>
+                                <div id="alert-error" class="alert alert-error" style="display: none;">
+                                    عذراً، حدث خطأ أثناء إرسال الرسالة. حاول مرة أخرى.
+                                </div>
+                                <form id="contact-form" class="contact-form" onsubmit="return false;">
+                                    <div class="input-group">
+                                        <input type="text" id="name" placeholder="الأسم" required>
+                                        <i class="fas fa-user icon"></i>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <input type="email" id="email" placeholder="البريد الالكتروني" required>
+                                        <i class="fas fa-envelope icon"></i>
+                                    </div>
+
+                                    <div class="input-group">
+                                        <textarea id="message" placeholder="محتوى الرسالة" required></textarea>
+                                        <i class="fas fa-comment icon textarea-icon"></i>
+                                    </div>
+
+                                    <button type="button" onclick="handleContactSubmit()" class="submit-btn">
+                                        <span class="btn-text">إرسال</span>
+                                        <div class="loading-spinner" style="display: none;"></div>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    `;
+                case 'الإعدادات':
+                    return `
+                        <div class="settings-section">
+                            <div class="settings-header">
+                                <h2>الإعدادات</h2>
+                            </div>
+                            <div class="settings-content">
+                                <div class="settings-group">
+                                    <h3>المظهر</h3>
+                                    <div class="theme-toggle">
+                                        <label>الوضع الليلي</label>
+                                        <label class="switch">
+                                            <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="settings-group">
+                                    <h3>اتصل بنا</h3>
+                                    <div class="contact-form-container">
+                                        <form id="contact-form" class="contact-form">
+                                            <div class="form-group">
+                                                <label for="name">الاسم</label>
+                                                <input type="text" id="name" name="name" required 
+                                                       placeholder="أدخل اسمك الكريم">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="email">البريد الإلكتروني</label>
+                                                <input type="email" id="email" name="email" required 
+                                                       placeholder="أدخل بريدك الإلكتروني">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="subject">الموضوع</label>
+                                                <input type="text" id="subject" name="subject" required 
+                                                       placeholder="موضوع الرسالة">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="message">الرسالة</label>
+                                                <textarea id="message" name="message" required 
+                                                          placeholder="اكتب رسالتك هنا"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <button type="submit" class="submit-btn">
+                                                    <span class="btn-text">إرسال</span>
+                                                    <div class="loading-spinner" style="display: none;"></div>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                default:
+                    return `
+                        <div class="error-section">
+                            <h2>عذراً</h2>
+                            <p>هذا القسم غير متوفر حالياً</p>
+                        </div>
+                    `;
             }
-        };
-
-        // دالة العودة للأعلى
-        function scrollToTop() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
         }
+    </script>
+    <script>
+        // تهيئة EmailJS
+        (function() {
+            emailjs.init("99PekU9UhSQKEhZbp");
+        })();
 
-        // إضافة خاصية التمرير السلس لجميع الروابط الداخلية
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // معالجة زر الرجوع في الموبايل
-        window.addEventListener('popstate', function(event) {
-            const contentModal = document.getElementById('content-modal');
-            const settingsModal = document.getElementById('settings-modal');
-            const aboutModal = document.getElementById('about-modal');
-            const contactModal = document.getElementById('contact-modal');
+        // دالة إرسال النموذج
+        async function handleContactSubmit() {
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const btnText = submitBtn.querySelector('.btn-text');
+            const spinner = submitBtn.querySelector('.loading-spinner');
+            const successAlert = document.getElementById('alert-success');
+            const errorAlert = document.getElementById('alert-error');
 
-            if (contentModal.style.display === 'flex' || 
-                settingsModal.style.display === 'block' || 
-                aboutModal.style.display === 'block' || 
-                contactModal.style.display === 'block') {
+            // إخفاء التنبيهات
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+
+            if (!name.value.trim() || !email.value.trim() || !message.value.trim()) {
+                errorAlert.textContent = 'من فضلك املأ جميع الحقول';
+                errorAlert.style.display = 'block';
+                return;
+            }
+
+            // تحديث حالة الزر
+            btnText.style.display = 'none';
+            spinner.style.display = 'block';
+            submitBtn.disabled = true;
+
+            try {
+                const templateParams = {
+                    to_name: "زاد المسلم",
+                    from_name: name.value.trim(),
+                    from_email: email.value.trim(),
+                    message: message.value.trim()
+                };
+
+                console.log('Sending email with params:', templateParams);
+
+                // إرسال البريد
+                const response = await emailjs.send(
+                    'service_0jgrrre',
+                    'template_xcgvgp4',
+                    templateParams
+                );
+
+                console.log('EmailJS Response:', response);
+
+                // نجاح الإرسال
+                successAlert.style.display = 'block';
                 
-                contentModal.style.display = 'none';
-                settingsModal.style.display = 'none';
-                aboutModal.style.display = 'none';
-                contactModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                event.preventDefault();
+                // مسح الحقول
+                name.value = '';
+                email.value = '';
+                message.value = '';
+                
+            } catch (error) {
+                // فشل الإرسال
+                console.error('EmailJS Error:', error);
+                errorAlert.textContent = 'عذراً، حدث خطأ أثناء إرسال الرسالة. ' + (error.text || error.message);
+                errorAlert.style.display = 'block';
+            } finally {
+                // إعادة الزر لحالته الطبيعية
+                btnText.style.display = 'block';
+                spinner.style.display = 'none';
+                submitBtn.disabled = false;
             }
-        });
-
-        // تحسين أداء التمرير
-        let scrollTimeout;
-        document.addEventListener('scroll', () => {
-            clearTimeout(scrollTimeout);
-            scrollTimeout = setTimeout(() => {
-                window.requestAnimationFrame(() => {
-                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                    if (scrollTop > 20) {
-                        document.querySelector('.scroll-to-top').classList.add('visible');
-                    } else {
-                        document.querySelector('.scroll-to-top').classList.remove('visible');
-                    }
-                });
-            }, 100);
-        }, { passive: true });
-
-        // تحسين التمرير
-        document.querySelectorAll('.modal-content, .app-wrapper').forEach(element => {
-            let touchStartY = 0;
-            let touchEndY = 0;
-
-            element.addEventListener('touchstart', function(e) {
-                touchStartY = e.touches[0].clientY;
-            }, { passive: true });
-
-            element.addEventListener('touchmove', function(e) {
-                touchEndY = e.touches[0].clientY;
-                const scrollTop = element.scrollTop;
-                const scrollHeight = element.scrollHeight;
-                const offsetHeight = element.offsetHeight;
-
-                // منع التمرير للأعلى عندما نكون في أعلى المحتوى
-                if (scrollTop <= 0 && touchEndY > touchStartY) {
-                    e.preventDefault();
-                }
-
-                // منع التمرير للأسفل عندما نكون في أسفل المحتوى
-                if (scrollTop + offsetHeight >= scrollHeight && touchEndY < touchStartY) {
-                    e.preventDefault();
-                }
-            }, { passive: false });
-        });
+        }
     </script>
 </body>
 </html>
