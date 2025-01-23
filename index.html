@@ -41,10 +41,25 @@
             min-height: 100vh;
             padding: 20px;
             overflow-y: auto;
-            scroll-behavior: smooth;
             -webkit-overflow-scrolling: touch;
             -webkit-tap-highlight-color: transparent;
             overscroll-behavior-y: contain;
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .app-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding: 20px;
         }
 
         .phone-container {
@@ -102,7 +117,6 @@
         }
 
         .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
@@ -110,23 +124,28 @@
             height: 100%;
             background: rgba(0,0,0,0.5);
             z-index: 1000;
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
+            padding: 20px;
         }
 
         .modal-content {
             background: var(--card-bg);
             width: 90%;
             max-width: 480px;
-            margin: 20px auto;
+            margin: auto;
             border-radius: 20px;
             padding: 20px;
             position: relative;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
             max-height: 85vh;
-            overscroll-behavior: contain;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .close-button {
@@ -153,6 +172,8 @@
             margin-bottom: 15px;
             overflow-y: auto;
             -webkit-overflow-scrolling: touch;
+            transform: translateZ(0);
+            -webkit-transform: translateZ(0);
         }
 
         .arabic-text {
@@ -175,6 +196,14 @@
 
         @media (max-width: 480px) {
             body {
+                padding: 10px;
+            }
+
+            .app-wrapper {
+                padding: 10px;
+            }
+            
+            .modal {
                 padding: 10px;
             }
 
@@ -329,57 +358,59 @@
     </style>
 </head>
 <body>
-    <div class="phone-container">
-        <div class="header">
-            <div class="header-icons">
-                <i class="fas fa-cog" onclick="openSettings()" style="cursor: pointer;"></i>
+    <div class="app-wrapper">
+        <div class="phone-container">
+            <div class="header">
+                <div class="header-icons">
+                    <i class="fas fa-cog" onclick="openSettings()" style="cursor: pointer;"></i>
+                </div>
+                <h1>زاد المسلم</h1>
+                <div class="header-icons">
+                    <i class="fas fa-moon" onclick="toggleDarkMode()" style="cursor: pointer;"></i>
+                </div>
             </div>
-            <h1>زاد المسلم</h1>
-            <div class="header-icons">
-                <i class="fas fa-moon" onclick="toggleDarkMode()" style="cursor: pointer;"></i>
-            </div>
-        </div>
-        <div class="main-content">
-            <div class="grid-container">
-                <div class="grid-item" onclick="showContent('الرقية_بالقرآن')">
-                    <i class="fas fa-book-quran"></i>
-                    <span>الرقية بالقرآن</span>
-                </div>
-                <div class="grid-item" onclick="showContent('الرقية_بالسنة')">
-                    <i class="fas fa-hand-holding-medical"></i>
-                    <span>الرقية بالسنة</span>
-                </div>
-                <div class="grid-item" onclick="showContent('أذكار_الصباح')">
-                    <i class="fas fa-sun"></i>
-                    <span>أذكار الصباح</span>
-                </div>
-                <div class="grid-item" onclick="showContent('أذكار_المساء')">
-                    <i class="fas fa-moon"></i>
-                    <span>أذكار المساء</span>
-                </div>
-                <div class="grid-item" onclick="showContent('سورة_الملك')">
-                    <i class="fas fa-quran"></i>
-                    <span>سورة الملك</span>
-                </div>
-                <div class="grid-item" onclick="showContent('سورة_الكهف')">
-                    <i class="fas fa-book"></i>
-                    <span>سورة الكهف</span>
-                </div>
-                <div class="grid-item" onclick="showContent('السيرة_النبوية')">
-                    <i class="fas fa-mosque"></i>
-                    <span>السيرة النبوية</span>
-                </div>
-                <div class="grid-item" onclick="showContent('قصص_الأنبياء')">
-                    <i class="fas fa-kaaba"></i>
-                    <span>قصص الأنبياء</span>
-                </div>
-                <div class="grid-item" onclick="showContent('قصص_الصحابة')">
-                    <i class="fas fa-star"></i>
-                    <span>قصص الصحابة</span>
-                </div>
-                <div class="grid-item" onclick="showContent('أعلام_الأمة')">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>أعلام الأمة</span>
+            <div class="main-content">
+                <div class="grid-container">
+                    <div class="grid-item" onclick="showContent('الرقية_بالقرآن')">
+                        <i class="fas fa-book-quran"></i>
+                        <span>الرقية بالقرآن</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('الرقية_بالسنة')">
+                        <i class="fas fa-hand-holding-medical"></i>
+                        <span>الرقية بالسنة</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('أذكار_الصباح')">
+                        <i class="fas fa-sun"></i>
+                        <span>أذكار الصباح</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('أذكار_المساء')">
+                        <i class="fas fa-moon"></i>
+                        <span>أذكار المساء</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('سورة_الملك')">
+                        <i class="fas fa-quran"></i>
+                        <span>سورة الملك</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('سورة_الكهف')">
+                        <i class="fas fa-book"></i>
+                        <span>سورة الكهف</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('السيرة_النبوية')">
+                        <i class="fas fa-mosque"></i>
+                        <span>السيرة النبوية</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('قصص_الأنبياء')">
+                        <i class="fas fa-kaaba"></i>
+                        <span>قصص الأنبياء</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('قصص_الصحابة')">
+                        <i class="fas fa-star"></i>
+                        <span>قصص الصحابة</span>
+                    </div>
+                    <div class="grid-item" onclick="showContent('أعلام_الأمة')">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>أعلام الأمة</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1412,11 +1443,11 @@
             </div>
         `;
 
-        function showContent(section) {
+        function showContent(contentId) {
             const contentModal = document.getElementById('content-modal');
             const modalContent = document.getElementById('modal-content');
-
-            switch(section) {
+            
+            switch(contentId) {
                 case 'الرقية_بالقرآن':
                     modalContent.innerHTML = الرقية_بالقرآن;
                     break;
@@ -1455,10 +1486,19 @@
                     break;
             }
 
-            contentModal.style.display = 'block';
+            contentModal.style.display = 'flex';
+            
+            // تحسين التمرير
             document.body.style.overflow = 'hidden';
-            modalContent.style.overflow = 'auto';
-            modalContent.style.webkitOverflowScrolling = 'touch';
+            modalContent.scrollTop = 0;
+            
+            // تفعيل الحركة السلسة
+            requestAnimationFrame(() => {
+                modalContent.style.opacity = '1';
+            });
+            
+            // إضافة حالة جديدة في التاريخ
+            history.pushState({ modal: 'content' }, '');
         }
 
         function toggleDarkMode() {
@@ -1473,30 +1513,42 @@
 
         function openSettings() {
             document.getElementById('settings-modal').style.display = 'block';
+            // إضافة حالة جديدة في التاريخ
+            history.pushState({ modal: 'settings' }, '');
         }
 
         function closeSettings() {
             document.getElementById('settings-modal').style.display = 'none';
+            // الرجوع للحالة السابقة
+            history.back();
         }
 
         function showAboutUs() {
             closeSettings();
             document.getElementById('about-modal').style.display = 'block';
+            // إضافة حالة جديدة في التاريخ
+            history.pushState({ modal: 'about' }, '');
         }
 
         function showContactUs() {
             closeSettings();
             document.getElementById('contact-modal').style.display = 'block';
+            // إضافة حالة جديدة في التاريخ
+            history.pushState({ modal: 'contact' }, '');
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+            // الرجوع للحالة السابقة
+            history.back();
         }
 
         function closeContentModal() {
             const contentModal = document.getElementById('content-modal');
             contentModal.style.display = 'none';
             document.body.style.overflow = 'auto';
+            // الرجوع للحالة السابقة
+            history.back();
         }
 
         function sendEmail(event) {
@@ -1544,6 +1596,43 @@
                 });
             });
         });
+        
+        // معالجة زر الرجوع في الموبايل
+        window.addEventListener('popstate', function(event) {
+            const contentModal = document.getElementById('content-modal');
+            const settingsModal = document.getElementById('settings-modal');
+            const aboutModal = document.getElementById('about-modal');
+            const contactModal = document.getElementById('contact-modal');
+
+            if (contentModal.style.display === 'flex' || 
+                settingsModal.style.display === 'block' || 
+                aboutModal.style.display === 'block' || 
+                contactModal.style.display === 'block') {
+                
+                contentModal.style.display = 'none';
+                settingsModal.style.display = 'none';
+                aboutModal.style.display = 'none';
+                contactModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                event.preventDefault();
+            }
+        });
+
+        // تحسين أداء التمرير
+        let scrollTimeout;
+        document.addEventListener('scroll', () => {
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+                window.requestAnimationFrame(() => {
+                    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                    if (scrollTop > 20) {
+                        document.querySelector('.scroll-to-top').classList.add('visible');
+                    } else {
+                        document.querySelector('.scroll-to-top').classList.remove('visible');
+                    }
+                });
+            }, 100);
+        }, { passive: true });
     </script>
 </body>
 </html>
